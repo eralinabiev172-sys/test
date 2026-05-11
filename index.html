@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест по Кыргызской Республике</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Интерактивный тест</p>
+        <h1>Тест по Кыргызской Республике</h1>
+        <p class="hero__text">
+          Выбирай язык, отвечай на вопросы и в конце получай готовую таблицу своих ответов.
+        </p>
+        <div class="hero__actions">
+          <button id="langRu" class="chip chip--active" type="button">Русский</button>
+          <button id="langKg" class="chip" type="button">Кыргызча</button>
+          <button id="startBtn" class="primary-btn" type="button">Начать тест</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="panel">
+          <h2>Прогресс</h2>
+          <p id="progressText">0 из 0 отвечено</p>
+          <div class="progress">
+            <div id="progressBar" class="progress__bar"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Управление</h2>
+          <button id="prevBtn" class="secondary-btn" type="button">Назад</button>
+          <button id="nextBtn" class="secondary-btn" type="button">Далее</button>
+          <button id="finishBtn" class="primary-btn" type="button">Завершить</button>
+          <button id="resetBtn" class="ghost-btn" type="button">Сбросить</button>
+        </div>
+
+        <div class="panel">
+          <h2>Подсказка</h2>
+          <p class="small-text">
+            Сейчас сайт показывает варианты ответов и собирает твои ответы как настоящий тест.
+            Если потом пришлешь ключ правильных ответов, я добавлю автоматическую проверку и оценку.
+          </p>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div id="statusBanner" class="status-banner">
+          Нажми «Начать тест», чтобы загрузить вопросы.
+        </div>
+
+        <div id="quizCard" class="quiz-card hidden">
+          <div class="quiz-card__top">
+            <span id="questionCounter" class="question-counter"></span>
+            <span id="questionNumberBadge" class="question-badge"></span>
+          </div>
+          <h2 id="questionTitle" class="question-title"></h2>
+          <div id="optionsList" class="options-list"></div>
+        </div>
+
+        <div id="resultCard" class="result-card hidden">
+          <h2>Твои ответы</h2>
+          <p id="resultSummary" class="result-summary"></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Вопрос</th>
+                  <th>Твой ответ</th>
+                  <th>Правильный вариант</th>
+                </tr>
+              </thead>
+              <tbody id="resultBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="javascript.js"></script>
+</body>
+</html>
