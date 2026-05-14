@@ -377,7 +377,7 @@ window.questionsData = [
             "8000 м",
             "2500 м"
         ],
-        "correctIndex": 0
+        "correctIndex": 3
     },
     {
         "number": 22,
@@ -883,7 +883,7 @@ window.questionsData = [
             "горно-степные",
             "такырные"
         ],
-        "correctIndex": 2
+        "correctIndex": 1
     },
     {
         "number": 50,
@@ -939,7 +939,7 @@ window.questionsData = [
             "глубинным",
             "высотным"
         ],
-        "correctIndex": 3
+        "correctIndex": 2
     },
     {
         "number": 53,
@@ -1335,7 +1335,7 @@ window.questionsData = [
             "Чуйской долине",
             "Сары-Джазской долине"
         ],
-        "correctIndex": 3
+        "correctIndex": 2
     },
     {
         "number": 75,
@@ -1605,7 +1605,7 @@ window.questionsData = [
             "Барскоон",
             "Сулукта"
         ],
-        "correctIndex": 1
+        "correctIndex": 0
     },
     {
         "number": 90,
@@ -1823,7 +1823,7 @@ window.questionsData = [
             "3",
             "2"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 102,
@@ -1841,7 +1841,7 @@ window.questionsData = [
             "43%",
             "35%"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 103,
@@ -1859,7 +1859,7 @@ window.questionsData = [
             "74%",
             "80%"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 104,
@@ -1877,7 +1877,7 @@ window.questionsData = [
             "7млн. 300тыс.чел",
             "5млн.128тыс.чел"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 105,
@@ -1895,7 +1895,7 @@ window.questionsData = [
             "53%",
             "60%"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 106,
@@ -1913,7 +1913,7 @@ window.questionsData = [
             "60%",
             "70%"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 107,
@@ -1931,7 +1931,7 @@ window.questionsData = [
             "2000-2200м",
             "3000 и выше"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 108,
@@ -1949,7 +1949,7 @@ window.questionsData = [
             "ксерофиты",
             "гидрофиты"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 109,
@@ -1967,7 +1967,7 @@ window.questionsData = [
             "в 1991г. в целях сохранения Тянь-Шанского илбирса",
             "в 1976г. в целях сохранения животного мира"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 110,
@@ -1985,7 +1985,7 @@ window.questionsData = [
             "белая береза",
             "все виды растений"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 111,
@@ -2003,7 +2003,7 @@ window.questionsData = [
             "низкорослая арча",
             "красный огонь"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 112,
@@ -2021,7 +2021,7 @@ window.questionsData = [
             "на западе",
             "на востоке"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 113,
@@ -2036,9 +2036,10 @@ window.questionsData = [
         "optionsRu": [
             "В Хайдаркене",
             "В Майлы-Суу",
-            "В Кадамджае"
+            "В Кадамджае",
+            "В Борду"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 114,
@@ -2056,7 +2057,7 @@ window.questionsData = [
             "1976г. в целях сохранения уникального ландшафта ущелья",
             "1979г. в целях сохранения арчово-еловых лесов"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 115,
@@ -2074,7 +2075,7 @@ window.questionsData = [
             "пихта Семенова",
             "арча"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 116,
@@ -2092,7 +2093,7 @@ window.questionsData = [
             "Кунгей Ала-Тоо",
             "Кыргызский Ала-Тоо"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 117,
@@ -2108,7 +2109,7 @@ window.questionsData = [
             "1993-ж мензбир суурун коргоо максатында",
             "1959-ж уникалдуу жангак-мөмө токойлорунун жаратылыш комплексин"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 118,
@@ -2126,7 +2127,7 @@ window.questionsData = [
             "1970г. в целях развития туризма",
             "1976г. в целях сохранения животных высокогорья"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 119,
@@ -2144,7 +2145,7 @@ window.questionsData = [
             "1996г. для сохранения уникальных растений эндемиков",
             "1997г. в целях сохранения природной среды"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 120,
@@ -2162,7 +2163,7 @@ window.questionsData = [
             "форель",
             "маринка"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 121,
@@ -2180,7 +2181,7 @@ window.questionsData = [
             "форель",
             "лещ"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 122,
@@ -2198,7 +2199,7 @@ window.questionsData = [
             "в 2000г. в целях сохранения фауны и флоры озера",
             "в 1995г. В целях развития туризма Иссык-Куля"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 123,
@@ -2216,7 +2217,7 @@ window.questionsData = [
             "3марта 1974г",
             "4июля 1985г"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 124,
@@ -2229,9 +2230,12 @@ window.questionsData = [
             "2001-ж Нарын аймагынын жаратылышын коргоо максатында"
         ],
         "optionsRu": [
-            "в 1983г.в целях сохранения животного мира до гляциально-нивального"
+            "в 1983 г. в целях сохранения животного мира от массивов тянь-шаньской ели до гляциально-нивального пояса",
+            "в 1994 г. в целях охраны маралов, архаров и козерогов",
+            "в 1961 г. в целях охраны крупных млекопитающих, численность которых сокращается",
+            "в 2001 г. в целях охраны природы Нарынского региона"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 125,
@@ -2240,7 +2244,8 @@ window.questionsData = [
         "optionsKg": [
             "18,3миңга",
             "11миң га",
-            "53,4миң га 100минге чукул"
+            "53,4миң га",
+            "100минге чукул"
         ],
         "optionsRu": [
             "18,3 млн.га",
@@ -2248,7 +2253,7 @@ window.questionsData = [
             "53,4млн.га",
             "100млн.га"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 126,
@@ -2266,7 +2271,7 @@ window.questionsData = [
             "Найманская",
             "Торт-Кульская"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 127,
@@ -2284,7 +2289,7 @@ window.questionsData = [
             "Джалал-Абад",
             "Массы"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 128,
@@ -2302,7 +2307,7 @@ window.questionsData = [
             "хребет Терскей Ала-Тоо",
             "Юго-Западный склон Ферганского хребта"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 129,
@@ -2320,7 +2325,7 @@ window.questionsData = [
             "Ош",
             "Ала-Арча"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 130,
@@ -2338,7 +2343,7 @@ window.questionsData = [
             "с Таласской",
             "с Ошской"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 131,
@@ -2356,7 +2361,7 @@ window.questionsData = [
             "Чуйская и Таласская",
             "Иссык-Кульская и Чуйская"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 132,
@@ -2374,7 +2379,7 @@ window.questionsData = [
             "животноводство",
             "легкая промышленность"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 133,
@@ -2392,7 +2397,7 @@ window.questionsData = [
             "западную часть",
             "восточную часть"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 134,
@@ -2410,7 +2415,7 @@ window.questionsData = [
             "43,1миң.км2",
             "13,4 миң.км2"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 135,
@@ -2428,7 +2433,7 @@ window.questionsData = [
             "Кара-Бууринский, Бакай-Атинский, Манасский",
             "Аксыйский, Ала-Букинский, Базар-Коргонский"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 136,
@@ -2446,7 +2451,7 @@ window.questionsData = [
             "17 тыс. км2",
             "29,2 тыс. км2"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 137,
@@ -2464,7 +2469,7 @@ window.questionsData = [
             "31 город, 9 поселков городского типа",
             "27 городов, 8 поселков городского типа"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 138,
@@ -2482,7 +2487,7 @@ window.questionsData = [
             "не достигшие 16 лет",
             "входят все желающие работать на производстве"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 139,
@@ -2500,7 +2505,7 @@ window.questionsData = [
             "58,6%",
             "50,5%"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 140,
@@ -2518,7 +2523,7 @@ window.questionsData = [
             "Ошская",
             "Нарынская"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 141,
@@ -2536,7 +2541,7 @@ window.questionsData = [
             "мигрант",
             "консултант"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 142,
@@ -2554,7 +2559,7 @@ window.questionsData = [
             "«Жер-Үй» алтын комбинаты",
             "«Солтон-Сары» алтын комбинаты"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 143,
@@ -2572,7 +2577,7 @@ window.questionsData = [
             "электроэнергетика",
             "горно-добывающая промышленность"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 144,
@@ -2590,7 +2595,7 @@ window.questionsData = [
             "мясная промышленность",
             "промышленность по обработке шкуры"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 145,
@@ -2608,7 +2613,7 @@ window.questionsData = [
             "Чуй",
             "Нарын"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 146,
@@ -2626,7 +2631,7 @@ window.questionsData = [
             "Ат-Башы",
             "Тар"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 147,
@@ -2644,7 +2649,7 @@ window.questionsData = [
             "Каджи-Сай",
             "Кок-Янгак"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 148,
@@ -2662,7 +2667,7 @@ window.questionsData = [
             "трубопроводный транспорт",
             "воздушный транспорт"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 149,
@@ -2680,7 +2685,7 @@ window.questionsData = [
             "олово",
             "медь"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 150,
@@ -2698,7 +2703,7 @@ window.questionsData = [
             "сенокосные угодья",
             "неполивные (богарные) земли"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 151,
@@ -2716,7 +2721,7 @@ window.questionsData = [
             "летом",
             "осенью"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 152,
@@ -2734,7 +2739,7 @@ window.questionsData = [
             "Талас облусунда",
             "Ош облусунда"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 153,
@@ -2752,7 +2757,7 @@ window.questionsData = [
             "кой чарбасы",
             "балык чарбасы"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 154,
@@ -2770,7 +2775,7 @@ window.questionsData = [
             "тор өнөр жайы",
             "булгаары бут кийим өнөр жайы"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 155,
@@ -2788,7 +2793,7 @@ window.questionsData = [
             "дыйканчылык",
             "дан иштетүү"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 156,
@@ -2806,7 +2811,7 @@ window.questionsData = [
             "Кара-Балта",
             "Бишкек"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 157,
@@ -2824,7 +2829,7 @@ window.questionsData = [
             "трубопроводный",
             "воздушный"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 158,
@@ -2842,7 +2847,7 @@ window.questionsData = [
             "железнодорожного транспорта",
             "морского транспорта"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 159,
@@ -2860,7 +2865,7 @@ window.questionsData = [
             "Тоо -Ашуу",
             "Кара-Кия"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 160,
@@ -2878,7 +2883,7 @@ window.questionsData = [
             "2015-жылдын 12-август",
             "2013-жылы 13-апрель"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 161,
@@ -2896,7 +2901,7 @@ window.questionsData = [
             "Казакстан",
             "Россия"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 162,
@@ -2914,7 +2919,7 @@ window.questionsData = [
             "Нарынская область",
             "Ошская область"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 163,
@@ -2932,7 +2937,7 @@ window.questionsData = [
             "Ферганская",
             "Кочкорскаяака через город ОШ"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 164,
@@ -2950,7 +2955,7 @@ window.questionsData = [
             "восточную",
             "юго-западную"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 165,
@@ -2968,7 +2973,7 @@ window.questionsData = [
             "Иссык-Кульская",
             "Нарынская"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 166,
@@ -2986,7 +2991,7 @@ window.questionsData = [
             "43,1тыс. км2",
             "11,4 тыс. км2"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 167,
@@ -3004,7 +3009,7 @@ window.questionsData = [
             "в западной",
             "в восточной"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 168,
@@ -3022,7 +3027,7 @@ window.questionsData = [
             "овощи-фрукты",
             "фасоль"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 169,
@@ -3040,7 +3045,7 @@ window.questionsData = [
             "в западной",
             "в северо-западной"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 170,
@@ -3058,7 +3063,7 @@ window.questionsData = [
             "548м",
             "712 м"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 171,
@@ -3076,7 +3081,7 @@ window.questionsData = [
             "В Кыргызском Ала тоо",
             "В Илеском Ала тоо"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 172,
@@ -3094,7 +3099,7 @@ window.questionsData = [
             "Нарын",
             "Тюп"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 173,
@@ -3112,7 +3117,7 @@ window.questionsData = [
             "Бишкеке, Нарыне, Сулюкте",
             "Бишкеке, Жалал-Абад, Караколе"
         ],
-        "correctIndex": null
+        "correctIndex": 1
     },
     {
         "number": 174,
@@ -3130,7 +3135,7 @@ window.questionsData = [
             "14.03.1890г",
             "20.08.1922г"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 175,
@@ -3148,7 +3153,7 @@ window.questionsData = [
             "Бишкек-Торугарт",
             "Ош-Хорог"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 176,
@@ -3166,7 +3171,7 @@ window.questionsData = [
             "груша",
             "инжир"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 177,
@@ -3184,7 +3189,7 @@ window.questionsData = [
             "Сары-Челек",
             "Беш-Таш"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     },
     {
         "number": 178,
@@ -3202,7 +3207,7 @@ window.questionsData = [
             "Баткен,Ош",
             "Жалал-Абад, Чүй"
         ],
-        "correctIndex": null
+        "correctIndex": 3
     },
     {
         "number": 179,
@@ -3220,7 +3225,7 @@ window.questionsData = [
             "Баткен",
             "Жалал-Абад"
         ],
-        "correctIndex": null
+        "correctIndex": 2
     },
     {
         "number": 180,
@@ -3238,6 +3243,6 @@ window.questionsData = [
             "Нарын-Тоо",
             "Борколдой-Тоо"
         ],
-        "correctIndex": null
+        "correctIndex": 0
     }
 ];

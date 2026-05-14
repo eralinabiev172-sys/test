@@ -20,7 +20,8 @@ def load_paragraphs(source_path: Path):
         for run in para.findall("w:r", ns):
             text = "".join(node.text or "" for node in run.findall(".//w:t", ns))
             if text:
-                runs.append((text, ""))
+                is_bold = run.find("w:rPr/w:b", ns) is not None
+                runs.append((text, is_bold))
 
         full_text = "".join(text for text, _ in runs).strip()
         if full_text:
@@ -44,27 +45,33 @@ def split_question_paragraph(text: str):
 
 
 def synthetic_paragraph(text: str):
-    return {"text": text, "runs": [(text, "")]}
+    return {"text": text, "runs": [(text, False)]}
 
 
 def parse_options(paragraphs):
     chars = []
+    flags = []
     for para in paragraphs:
-        for text, _ in para["runs"]:
+        for text, is_bold in para["runs"]:
             chars.extend(text)
+            flags.extend([is_bold] * len(text))
         chars.append("\n")
+        flags.append(False)
 
     flat_text = "".join(chars)
     matches = list(OPTION_MARK_RE.finditer(flat_text))
 
     options = []
+    correct_index = None
     for index, match in enumerate(matches):
         start = match.end()
         end = matches[index + 1].start() if index + 1 < len(matches) else len(flat_text)
         option = re.sub(r"\s+", " ", flat_text[start:end]).strip(" ;,.\n\t")
         options.append(option)
+        if correct_index is None and any(flags[start:end]):
+            correct_index = index
 
-    return options
+    return options, correct_index
 
 
 def build_questions(paragraphs):
@@ -124,14 +131,17 @@ def build_questions(paragraphs):
                     index += 1
 
         if number not in seen_numbers:
+            options_kg, correct_kg = parse_options(kg_option_paragraphs)
+            options_ru, correct_ru = parse_options(ru_option_paragraphs)
+            correct_index = correct_ru if correct_ru is not None else correct_kg
             questions.append(
                 {
                     "number": number,
                     "kg": question_kg,
                     "ru": question_ru or question_kg,
-                    "optionsKg": parse_options(kg_option_paragraphs),
-                    "optionsRu": parse_options(ru_option_paragraphs) or parse_options(kg_option_paragraphs),
-                    "correctIndex": None,
+                    "optionsKg": options_kg,
+                    "optionsRu": options_ru or options_kg,
+                    "correctIndex": correct_index,
                 }
             )
             seen_numbers.add(number)
@@ -156,7 +166,8 @@ def load_known_answers(output_path: Path):
 
 def main():
     project_root = Path(__file__).resolve().parent.parent
-    source_path = project_root / "answers_source.docx"
+    preferred_source = project_root / "full_answers.docx"
+    source_path = preferred_source if preferred_source.exists() else project_root / "answers_source.docx"
     output_path = project_root / "questions.js"
 
     paragraphs = load_paragraphs(source_path)
@@ -166,7 +177,8 @@ def main():
 
     known_answers = load_known_answers(output_path)
     for question in questions:
-        question["correctIndex"] = known_answers.get(question["number"])
+        if question["correctIndex"] is None:
+            question["correctIndex"] = known_answers.get(question["number"])
 
     payload = "window.questionsData = " + json.dumps(questions, ensure_ascii=False, indent=4) + ";\n"
     output_path.write_text(payload, encoding="utf-8")

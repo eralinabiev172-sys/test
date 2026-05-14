@@ -11,17 +11,24 @@ const translations = {
     statusQuestion: "Выбери один вариант ответа или перейди к нужному номеру через навигатор.",
     statusResult: "Ниже показаны твои ответы, правильные варианты и общий результат.",
     noAnswer: "Нет ответа",
-    noKey: "Ключ не задан",
+    noKey: "Нет ключа ответа",
     resultTitle: "Твои ответы",
-    resultSummary: (answered, total, correct, wrong, unanswered) =>
-      `Отвечено: ${answered} из ${total}. Правильно: ${correct}. Неправильно: ${wrong}. Без ответа: ${unanswered}.`,
+    resultSummary: (answered, total, gradable, correct, wrong, unanswered, ungraded) =>
+      `Отвечено: ${answered} из ${total}. С ключом: ${gradable}. Правильно: ${correct}. Неправильно: ${wrong}. Без ответа: ${unanswered}. Без ключа: ${ungraded}.`,
     resultScore: (correct, total, percent) => `${correct} из ${total} верно · ${percent}%`,
+    resultScoreNoKey: (total) => `Для ${total} вопросов ключи ответа не заданы`,
     mapTitle: "Карта вопросов",
     mapHint: "Нажми на номер, чтобы быстро перейти",
     startLabel: "Начать тест",
     finishLabel: "Завершить",
     resetLabel: "Сбросить",
-    newVariantLabel: "Новый вариант"
+    newVariantLabel: "Новый вариант",
+    jumpLabel: "Перейти к вопросу",
+    jumpButtonLabel: "Открыть",
+    jumpPlaceholder: "№",
+    jumpMissing: (number) => `Вопрос №${number} не вошел в текущий вариант.`,
+    sessionNote: "Прогресс сохраняется на этом устройстве.",
+    sessionRestored: "Прошлый прогресс восстановлен."
   },
   kg: {
     questionPrefix: "Суроо №",
@@ -32,17 +39,24 @@ const translations = {
     statusQuestion: "Бир жоопту танда же навигатордон керектүү номерге өт.",
     statusResult: "Төмөндө сенин жоопторуң, туура варианттар жана жыйынтык көрсөтүлдү.",
     noAnswer: "Жооп жок",
-    noKey: "Туура жооп берилген эмес",
+    noKey: "Туура жооптун ачкычы жок",
     resultTitle: "Сенин жоопторуң",
-    resultSummary: (answered, total, correct, wrong, unanswered) =>
-      `Жооп берилгени: ${answered} / ${total}. Туурасы: ${correct}. Туура эмеси: ${wrong}. Жоопсуз: ${unanswered}.`,
+    resultSummary: (answered, total, gradable, correct, wrong, unanswered, ungraded) =>
+      `Жооп берилгени: ${answered} / ${total}. Ачкычы бар суроолор: ${gradable}. Туурасы: ${correct}. Туура эмеси: ${wrong}. Жоопсуз: ${unanswered}. Ачкычы жок: ${ungraded}.`,
     resultScore: (correct, total, percent) => `${correct} / ${total} туура · ${percent}%`,
+    resultScoreNoKey: (total) => `${total} суроонун туура жооп ачкычы берилген эмес`,
     mapTitle: "Суроолор картасы",
     mapHint: "Тез өтүү үчүн номерди бас",
     startLabel: "Тестти баштоо",
     finishLabel: "Аяктоо",
     resetLabel: "Тазалоо",
-    newVariantLabel: "Жаңы вариант"
+    newVariantLabel: "Жаңы вариант",
+    jumpLabel: "Суроого өтүү",
+    jumpButtonLabel: "Ачуу",
+    jumpPlaceholder: "№",
+    jumpMissing: (number) => `№${number} суроо ушул вариантка кирбей калды.`,
+    sessionNote: "Прогресс ушул түзмөктө сакталат.",
+    sessionRestored: "Мурунку прогресс калыбына келтирилди."
   }
 };
 
@@ -51,7 +65,9 @@ const state = {
   started: false,
   currentIndex: 0,
   answers: {},
-  limit: null
+  limit: null,
+  showingResults: false,
+  sessionNoteKey: "sessionNote"
 };
 
 const ui = {
@@ -64,6 +80,10 @@ const ui = {
   resetBtn: document.getElementById("resetBtn"),
   newVariantBtn: document.getElementById("newVariantBtn"),
   questionLimit: document.getElementById("questionLimit"),
+  jumpInput: document.getElementById("jumpToQuestion"),
+  jumpBtn: document.getElementById("jumpBtn"),
+  jumpLabel: document.getElementById("jumpLabel"),
+  sessionNote: document.getElementById("sessionNote"),
   statusBanner: document.getElementById("statusBanner"),
   quizCard: document.getElementById("quizCard"),
   resultCard: document.getElementById("resultCard"),
@@ -85,10 +105,84 @@ const ui = {
 };
 
 const letters = ["A", "B", "C", "D", "E"];
+const storageKey = `quiz-progress:${location.pathname}`;
 
 function t(key, ...args) {
   const value = translations[state.lang][key];
   return typeof value === "function" ? value(...args) : value;
+}
+
+function renderSessionNote() {
+  if (ui.sessionNote) {
+    ui.sessionNote.textContent = t(state.sessionNoteKey);
+  }
+}
+
+function clearSavedProgress() {
+  try {
+    window.localStorage.removeItem(storageKey);
+  } catch {
+    // Ignore storage failures and continue without persistence.
+  }
+}
+
+function saveProgress() {
+  const hasUsefulState = questions.length > 0 && (state.started || state.showingResults || getAnsweredCount() > 0);
+  if (!hasUsefulState) {
+    clearSavedProgress();
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(storageKey, JSON.stringify({
+      lang: state.lang,
+      started: state.started,
+      currentIndex: state.currentIndex,
+      answers: state.answers,
+      limit: state.limit,
+      showingResults: state.showingResults,
+      questions,
+      sourceTotal: sourceQuestions.length
+    }));
+  } catch {
+    // Ignore storage failures and keep the quiz interactive.
+  }
+}
+
+function restoreProgress() {
+  try {
+    const raw = window.localStorage.getItem(storageKey);
+    if (!raw) {
+      return false;
+    }
+
+    const saved = JSON.parse(raw);
+    if (!saved || !Array.isArray(saved.questions) || saved.questions.length === 0) {
+      return false;
+    }
+
+    if (saved.sourceTotal !== sourceQuestions.length) {
+      return false;
+    }
+
+    questions = saved.questions;
+    state.lang = saved.lang === "kg" ? "kg" : "ru";
+    state.started = Boolean(saved.started);
+    state.answers = saved.answers && typeof saved.answers === "object" ? saved.answers : {};
+    state.limit = Number.isFinite(saved.limit) ? saved.limit : saved.questions.length;
+    state.currentIndex = Number.isInteger(saved.currentIndex)
+      ? Math.min(Math.max(saved.currentIndex, 0), saved.questions.length - 1)
+      : 0;
+    state.showingResults = Boolean(saved.showingResults);
+    state.sessionNoteKey = "sessionRestored";
+    if (ui.questionLimit) {
+      ui.questionLimit.value = String(state.limit);
+    }
+    renderSessionNote();
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function shuffleQuestions(items) {
@@ -152,12 +246,22 @@ function getAnsweredCount() {
   return Object.keys(state.answers).length;
 }
 
+function hasAnswerKey(question) {
+  return Number.isInteger(question.correctIndex) && question.correctIndex >= 0;
+}
+
 function countResults() {
   let correct = 0;
   let wrong = 0;
   let unanswered = 0;
+  let ungraded = 0;
 
   questions.forEach((question) => {
+    if (!hasAnswerKey(question)) {
+      ungraded += 1;
+      return;
+    }
+
     const answerIndex = state.answers[String(question.number)];
     if (answerIndex === undefined) {
       unanswered += 1;
@@ -171,7 +275,7 @@ function countResults() {
     }
   });
 
-  return { correct, wrong, unanswered };
+  return { correct, wrong, unanswered, ungraded };
 }
 
 function updateLanguageButtons() {
@@ -185,6 +289,16 @@ function updateLanguageButtons() {
   if (ui.newVariantBtn) {
     ui.newVariantBtn.textContent = t("newVariantLabel");
   }
+  if (ui.jumpLabel) {
+    ui.jumpLabel.textContent = t("jumpLabel");
+  }
+  if (ui.jumpBtn) {
+    ui.jumpBtn.textContent = t("jumpButtonLabel");
+  }
+  if (ui.jumpInput) {
+    ui.jumpInput.placeholder = t("jumpPlaceholder");
+  }
+  renderSessionNote();
 }
 
 function updateControls() {
@@ -199,6 +313,12 @@ function updateControls() {
   }
   if (ui.newVariantBtn) {
     ui.newVariantBtn.disabled = sourceQuestions.length === 0;
+  }
+  if (ui.jumpInput) {
+    ui.jumpInput.disabled = questions.length === 0;
+  }
+  if (ui.jumpBtn) {
+    ui.jumpBtn.disabled = questions.length === 0;
   }
 }
 
@@ -219,6 +339,7 @@ function renderQuestionMap() {
       }
       state.currentIndex = index;
       renderQuestion();
+      scrollIntoViewIfNeeded();
     });
 
     ui.questionMap.appendChild(btn);
@@ -239,6 +360,51 @@ function updateProgress() {
   updateControls();
 }
 
+function scrollIntoViewIfNeeded() {
+  const target = state.showingResults ? ui.resultCard : ui.quizCard;
+  if (!target || target.classList.contains("hidden")) {
+    return;
+  }
+
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function answerCurrentQuestion(index) {
+  if (!state.started || !questions.length) {
+    return;
+  }
+
+  const question = questions[state.currentIndex];
+  const options = getQuestionOptions(question);
+  if (index < 0 || index >= options.length) {
+    return;
+  }
+
+  state.answers[String(question.number)] = index;
+  renderQuestion();
+}
+
+function goToQuestionNumber(rawValue) {
+  const questionNumber = Number(rawValue);
+  if (!Number.isInteger(questionNumber) || questionNumber <= 0) {
+    return;
+  }
+
+  if (!state.started) {
+    startQuiz();
+  }
+
+  const questionIndex = questions.findIndex((item) => item.number === questionNumber);
+  if (questionIndex === -1) {
+    ui.statusBanner.textContent = t("jumpMissing", questionNumber);
+    return;
+  }
+
+  state.currentIndex = questionIndex;
+  renderQuestion();
+  scrollIntoViewIfNeeded();
+}
+
 function renderQuestion() {
   const question = questions[state.currentIndex];
   const options = getQuestionOptions(question);
@@ -246,6 +412,7 @@ function renderQuestion() {
 
   ui.quizCard.classList.remove("hidden");
   ui.resultCard.classList.add("hidden");
+  state.showingResults = false;
   ui.questionCounter.textContent = `${state.currentIndex + 1} / ${questions.length}`;
   ui.questionNumberBadge.textContent = `${t("questionPrefix")}${question.number}`;
   ui.questionTitle.textContent = getQuestionText(question);
@@ -265,6 +432,7 @@ function renderQuestion() {
     input.addEventListener("change", () => {
       state.answers[key] = index;
       updateProgress();
+      saveProgress();
     });
 
     const label = document.createElement("label");
@@ -280,6 +448,7 @@ function renderQuestion() {
 
   ui.statusBanner.textContent = t("statusQuestion");
   updateProgress();
+  saveProgress();
 }
 
 function startQuiz() {
@@ -287,12 +456,16 @@ function startQuiz() {
   state.started = true;
   state.currentIndex = 0;
   state.answers = {};
+  state.showingResults = false;
+  state.sessionNoteKey = "sessionNote";
+  renderSessionNote();
   renderQuestion();
 }
 
 function showResults() {
   ui.quizCard.classList.add("hidden");
   ui.resultCard.classList.remove("hidden");
+  state.showingResults = true;
   ui.resultBody.innerHTML = "";
   ui.resultTitle.textContent = t("resultTitle");
 
@@ -300,14 +473,23 @@ function showResults() {
     const options = getQuestionOptions(question);
     const answerIndex = state.answers[String(question.number)];
     const correctIndex = question.correctIndex;
+    const isAnswered = answerIndex !== undefined;
+    const isCorrect = isAnswered && hasAnswerKey(question) && answerIndex === correctIndex;
     const answerText = answerIndex === undefined
       ? t("noAnswer")
       : `${letters[answerIndex]}. ${options[answerIndex]}`;
-    const correctText = correctIndex === undefined || options[correctIndex] === undefined
+    const correctText = !hasAnswerKey(question) || options[correctIndex] === undefined
       ? t("noKey")
       : `${letters[correctIndex]}. ${options[correctIndex]}`;
 
     const row = document.createElement("tr");
+    row.className = !hasAnswerKey(question)
+      ? "result-row result-row--ungraded"
+      : !isAnswered
+        ? "result-row result-row--skipped"
+        : isCorrect
+          ? "result-row result-row--correct"
+          : "result-row result-row--wrong";
     row.innerHTML = `
       <td>${question.number}</td>
       <td>${getQuestionText(question)}</td>
@@ -318,12 +500,17 @@ function showResults() {
   });
 
   const answered = getAnsweredCount();
-  const { correct, wrong, unanswered } = countResults();
-  const percent = questions.length ? Math.round((correct / questions.length) * 100) : 0;
-  ui.resultScore.textContent = t("resultScore", correct, questions.length, percent);
-  ui.resultSummary.textContent = t("resultSummary", answered, questions.length, correct, wrong, unanswered);
+  const { correct, wrong, unanswered, ungraded } = countResults();
+  const gradable = questions.length - ungraded;
+  const percent = gradable ? Math.round((correct / gradable) * 100) : 0;
+  ui.resultScore.textContent = gradable
+    ? t("resultScore", correct, gradable, percent)
+    : t("resultScoreNoKey", questions.length);
+  ui.resultSummary.textContent = t("resultSummary", answered, questions.length, gradable, correct, wrong, unanswered, ungraded);
   ui.statusBanner.textContent = t("statusResult");
   updateProgress();
+  saveProgress();
+  scrollIntoViewIfNeeded();
 }
 
 function resetQuiz() {
@@ -331,10 +518,14 @@ function resetQuiz() {
   state.started = false;
   state.currentIndex = 0;
   state.answers = {};
+  state.showingResults = false;
+  state.sessionNoteKey = "sessionNote";
+  renderSessionNote();
   ui.quizCard.classList.add("hidden");
   ui.resultCard.classList.add("hidden");
   ui.statusBanner.textContent = t("statusIdle");
   updateProgress();
+  clearSavedProgress();
 }
 
 ui.langRu.addEventListener("click", () => {
@@ -371,6 +562,7 @@ ui.prevBtn.addEventListener("click", () => {
   }
   state.currentIndex -= 1;
   renderQuestion();
+  scrollIntoViewIfNeeded();
 });
 
 ui.nextBtn.addEventListener("click", () => {
@@ -379,6 +571,7 @@ ui.nextBtn.addEventListener("click", () => {
   }
   state.currentIndex += 1;
   renderQuestion();
+  scrollIntoViewIfNeeded();
 });
 
 ui.finishBtn.addEventListener("click", () => {
@@ -389,6 +582,21 @@ ui.finishBtn.addEventListener("click", () => {
 });
 
 ui.resetBtn.addEventListener("click", resetQuiz);
+
+if (ui.jumpBtn) {
+  ui.jumpBtn.addEventListener("click", () => {
+    goToQuestionNumber(ui.jumpInput?.value);
+  });
+}
+
+if (ui.jumpInput) {
+  ui.jumpInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      goToQuestionNumber(ui.jumpInput.value);
+    }
+  });
+}
 
 if (ui.newVariantBtn) {
   ui.newVariantBtn.addEventListener("click", startQuiz);
@@ -402,5 +610,42 @@ if (ui.questionLimit) {
   });
 }
 
+document.addEventListener("keydown", (event) => {
+  const target = event.target;
+  const tagName = target?.tagName;
+  if (tagName === "INPUT" || tagName === "TEXTAREA" || tagName === "SELECT") {
+    return;
+  }
+
+  if (!state.started || state.showingResults) {
+    return;
+  }
+
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    ui.prevBtn.click();
+    return;
+  }
+
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    ui.nextBtn.click();
+    return;
+  }
+
+  if (/^[1-5]$/.test(event.key)) {
+    event.preventDefault();
+    answerCurrentQuestion(Number(event.key) - 1);
+  }
+});
+
 updateLanguageButtons();
-resetQuiz();
+if (restoreProgress()) {
+  if (state.showingResults) {
+    showResults();
+  } else {
+    renderQuestion();
+  }
+} else {
+  resetQuiz();
+}
