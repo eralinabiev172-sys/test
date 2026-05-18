@@ -66,6 +66,7 @@ const state = {
   currentIndex: 0,
   answers: {},
   limit: null,
+  randomMode: true,
   showingResults: false,
   sessionNoteKey: "sessionNote"
 };
@@ -80,6 +81,7 @@ const ui = {
   resetBtn: document.getElementById("resetBtn"),
   newVariantBtn: document.getElementById("newVariantBtn"),
   questionLimit: document.getElementById("questionLimit"),
+  randomToggleBtn: document.getElementById("randomToggleBtn"),
   jumpInput: document.getElementById("jumpToQuestion"),
   jumpBtn: document.getElementById("jumpBtn"),
   jumpLabel: document.getElementById("jumpLabel"),
@@ -112,6 +114,14 @@ function t(key, ...args) {
   return typeof value === "function" ? value(...args) : value;
 }
 
+function getRandomToggleLabel() {
+  if (state.lang === "kg") {
+    return state.randomMode ? "Тартип: аралаш" : "Тартип: ирети менен";
+  }
+
+  return state.randomMode ? "Порядок: случайный" : "Порядок: по порядку";
+}
+
 function renderSessionNote() {
   if (ui.sessionNote) {
     ui.sessionNote.textContent = t(state.sessionNoteKey);
@@ -140,6 +150,7 @@ function saveProgress() {
       currentIndex: state.currentIndex,
       answers: state.answers,
       limit: state.limit,
+      randomMode: state.randomMode,
       showingResults: state.showingResults,
       questions,
       sourceTotal: sourceQuestions.length
@@ -165,11 +176,12 @@ function restoreProgress() {
       return false;
     }
 
-    questions = saved.questions;
+    questions = getOrderedQuestions(saved.questions).slice(0, saved.questions.length);
     state.lang = saved.lang === "kg" ? "kg" : "ru";
     state.started = Boolean(saved.started);
     state.answers = saved.answers && typeof saved.answers === "object" ? saved.answers : {};
     state.limit = Number.isFinite(saved.limit) ? saved.limit : saved.questions.length;
+    state.randomMode = saved.randomMode !== false;
     state.currentIndex = Number.isInteger(saved.currentIndex)
       ? Math.min(Math.max(saved.currentIndex, 0), saved.questions.length - 1)
       : 0;
@@ -185,33 +197,17 @@ function restoreProgress() {
   }
 }
 
-function shuffleQuestions(items) {
+function getOrderedQuestions(items) {
+  return [...items].sort((first, second) => first.number - second.number);
+}
+
+function getRandomQuestions(items, limit) {
   const copy = [...items];
   for (let index = copy.length - 1; index > 0; index -= 1) {
     const swapIndex = Math.floor(Math.random() * (index + 1));
     [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
   }
-  return copy;
-}
-
-function shuffleQuestionOptions(question) {
-  const optionPairs = question.optionsKg.map((optionKg, index) => ({
-    optionKg,
-    optionRu: question.optionsRu[index],
-    originalIndex: index
-  }));
-
-  for (let index = optionPairs.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [optionPairs[index], optionPairs[swapIndex]] = [optionPairs[swapIndex], optionPairs[index]];
-  }
-
-  return {
-    ...question,
-    optionsKg: optionPairs.map((item) => item.optionKg),
-    optionsRu: optionPairs.map((item) => item.optionRu),
-    correctIndex: optionPairs.findIndex((item) => item.originalIndex === question.correctIndex)
-  };
+  return copy.slice(0, limit);
 }
 
 function getSelectedLimit() {
@@ -229,9 +225,12 @@ function getSelectedLimit() {
 
 function prepareVariant() {
   state.limit = getSelectedLimit();
-  questions = shuffleQuestions(sourceQuestions)
-    .slice(0, state.limit)
-    .map(shuffleQuestionOptions);
+  if (!state.randomMode || state.limit >= sourceQuestions.length) {
+    questions = getOrderedQuestions(sourceQuestions).slice(0, state.limit);
+    return;
+  }
+
+  questions = getOrderedQuestions(getRandomQuestions(sourceQuestions, state.limit));
 }
 
 function getQuestionText(question) {
@@ -288,6 +287,9 @@ function updateLanguageButtons() {
   ui.resetBtn.textContent = t("resetLabel");
   if (ui.newVariantBtn) {
     ui.newVariantBtn.textContent = t("newVariantLabel");
+  }
+  if (ui.randomToggleBtn) {
+    ui.randomToggleBtn.textContent = getRandomToggleLabel();
   }
   if (ui.jumpLabel) {
     ui.jumpLabel.textContent = t("jumpLabel");
@@ -600,6 +602,19 @@ if (ui.jumpInput) {
 
 if (ui.newVariantBtn) {
   ui.newVariantBtn.addEventListener("click", startQuiz);
+}
+
+if (ui.randomToggleBtn) {
+  ui.randomToggleBtn.addEventListener("click", () => {
+    state.randomMode = !state.randomMode;
+    updateLanguageButtons();
+
+    if (state.started || getAnsweredCount() > 0 || questions.length > 0) {
+      resetQuiz();
+    } else {
+      saveProgress();
+    }
+  });
 }
 
 if (ui.questionLimit) {
