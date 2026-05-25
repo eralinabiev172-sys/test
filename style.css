@@ -277,6 +277,18 @@ body {
   gap: 14px;
 }
 
+.quiz-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.quiz-nav__button {
+  margin-bottom: 0;
+  width: 100%;
+}
+
 .option-item {
   position: relative;
 }
@@ -615,6 +627,11 @@ th {
     width: 26px;
     height: 26px;
     font-size: 13px;
+  }
+
+  .quiz-nav {
+    gap: 10px;
+    margin-top: 16px;
   }
 
   .primary-btn,

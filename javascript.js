@@ -77,6 +77,8 @@ const ui = {
   startBtn: document.getElementById("startBtn"),
   prevBtn: document.getElementById("prevBtn"),
   nextBtn: document.getElementById("nextBtn"),
+  inlinePrevBtn: document.getElementById("inlinePrevBtn"),
+  inlineNextBtn: document.getElementById("inlineNextBtn"),
   finishBtn: document.getElementById("finishBtn"),
   resetBtn: document.getElementById("resetBtn"),
   newVariantBtn: document.getElementById("newVariantBtn"),
@@ -283,6 +285,12 @@ function updateLanguageButtons() {
   ui.questionMapTitle.textContent = t("mapTitle");
   ui.questionMapHint.textContent = t("mapHint");
   ui.startBtn.textContent = t("startLabel");
+  if (ui.inlinePrevBtn) {
+    ui.inlinePrevBtn.textContent = state.lang === "kg" ? "Артка" : "Назад";
+  }
+  if (ui.inlineNextBtn) {
+    ui.inlineNextBtn.textContent = state.lang === "kg" ? "Кийинки" : "Далее";
+  }
   ui.finishBtn.textContent = t("finishLabel");
   ui.resetBtn.textContent = t("resetLabel");
   if (ui.newVariantBtn) {
@@ -303,11 +311,55 @@ function updateLanguageButtons() {
   renderSessionNote();
 }
 
+function canReturnToPreviousQuestion() {
+  return state.started && state.showingResults && state.currentIndex > 0;
+}
+
+function hasCurrentQuestionAnswer() {
+  if (!state.started || !questions.length) {
+    return false;
+  }
+
+  const currentQuestion = questions[state.currentIndex];
+  return state.answers[String(currentQuestion.number)] !== undefined;
+}
+
+function canOpenQuestionAtIndex(index) {
+  if (!state.started) {
+    return false;
+  }
+
+  if (index < 0 || index >= questions.length) {
+    return false;
+  }
+
+  if (state.showingResults) {
+    return true;
+  }
+
+  if (index > state.currentIndex && !hasCurrentQuestionAnswer()) {
+    return false;
+  }
+
+  return index >= state.currentIndex;
+}
+
 function updateControls() {
-  const atStart = state.currentIndex === 0;
   const atEnd = state.currentIndex === questions.length - 1;
-  ui.prevBtn.disabled = !state.started || atStart;
-  ui.nextBtn.disabled = !state.started || atEnd;
+  const prevDisabled = !canReturnToPreviousQuestion();
+  const nextDisabled = !state.started || atEnd || !hasCurrentQuestionAnswer();
+  if (ui.prevBtn) {
+    ui.prevBtn.disabled = prevDisabled;
+  }
+  if (ui.nextBtn) {
+    ui.nextBtn.disabled = nextDisabled;
+  }
+  if (ui.inlinePrevBtn) {
+    ui.inlinePrevBtn.disabled = prevDisabled;
+  }
+  if (ui.inlineNextBtn) {
+    ui.inlineNextBtn.disabled = nextDisabled;
+  }
   ui.finishBtn.disabled = !state.started;
   ui.resetBtn.disabled = !state.started && getAnsweredCount() === 0;
   if (ui.questionLimit) {
@@ -334,10 +386,14 @@ function renderQuestionMap() {
     btn.textContent = question.number;
     btn.classList.toggle("map-button--current", index === state.currentIndex && state.started);
     btn.classList.toggle("map-button--answered", state.answers[String(question.number)] !== undefined);
+    btn.disabled = state.started && !canOpenQuestionAtIndex(index);
 
     btn.addEventListener("click", () => {
       if (!state.started) {
         startQuiz();
+      }
+      if (!canOpenQuestionAtIndex(index)) {
+        return;
       }
       state.currentIndex = index;
       renderQuestion();
@@ -402,6 +458,10 @@ function goToQuestionNumber(rawValue) {
     return;
   }
 
+  if (!canOpenQuestionAtIndex(questionIndex)) {
+    return;
+  }
+
   state.currentIndex = questionIndex;
   renderQuestion();
   scrollIntoViewIfNeeded();
@@ -462,6 +522,26 @@ function startQuiz() {
   state.sessionNoteKey = "sessionNote";
   renderSessionNote();
   renderQuestion();
+}
+
+function goToPreviousQuestion() {
+  if (!canReturnToPreviousQuestion()) {
+    return;
+  }
+
+  state.currentIndex -= 1;
+  renderQuestion();
+  scrollIntoViewIfNeeded();
+}
+
+function goToNextQuestion() {
+  if (!state.started || state.currentIndex >= questions.length - 1 || !hasCurrentQuestionAnswer()) {
+    return;
+  }
+
+  state.currentIndex += 1;
+  renderQuestion();
+  scrollIntoViewIfNeeded();
 }
 
 function showResults() {
@@ -558,23 +638,21 @@ ui.langKg.addEventListener("click", () => {
 
 ui.startBtn.addEventListener("click", startQuiz);
 
-ui.prevBtn.addEventListener("click", () => {
-  if (!state.started || state.currentIndex === 0) {
-    return;
-  }
-  state.currentIndex -= 1;
-  renderQuestion();
-  scrollIntoViewIfNeeded();
-});
+if (ui.prevBtn) {
+  ui.prevBtn.addEventListener("click", goToPreviousQuestion);
+}
 
-ui.nextBtn.addEventListener("click", () => {
-  if (!state.started || state.currentIndex >= questions.length - 1) {
-    return;
-  }
-  state.currentIndex += 1;
-  renderQuestion();
-  scrollIntoViewIfNeeded();
-});
+if (ui.nextBtn) {
+  ui.nextBtn.addEventListener("click", goToNextQuestion);
+}
+
+if (ui.inlinePrevBtn) {
+  ui.inlinePrevBtn.addEventListener("click", goToPreviousQuestion);
+}
+
+if (ui.inlineNextBtn) {
+  ui.inlineNextBtn.addEventListener("click", goToNextQuestion);
+}
 
 ui.finishBtn.addEventListener("click", () => {
   if (!state.started) {
@@ -638,13 +716,21 @@ document.addEventListener("keydown", (event) => {
 
   if (event.key === "ArrowLeft") {
     event.preventDefault();
-    ui.prevBtn.click();
+    if (ui.inlinePrevBtn) {
+      ui.inlinePrevBtn.click();
+    } else if (ui.prevBtn) {
+      ui.prevBtn.click();
+    }
     return;
   }
 
   if (event.key === "ArrowRight") {
     event.preventDefault();
-    ui.nextBtn.click();
+    if (ui.inlineNextBtn) {
+      ui.inlineNextBtn.click();
+    } else if (ui.nextBtn) {
+      ui.nextBtn.click();
+    }
     return;
   }
 
