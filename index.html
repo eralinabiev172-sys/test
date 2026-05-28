@@ -8,6 +8,11 @@
 </head>
 <body>
   <div class="page-shell">
+    <nav class="site-nav" aria-label="Разделы сайта">
+      <a class="site-nav__link site-nav__link--active" href="./index.html">География</a>
+      <a class="site-nav__link" href="./тест про исторю/index.html">История</a>
+      <a class="site-nav__link" href="./kyrgyz/index.html">Кыргыз тили</a>
+    </nav>
     <header class="hero">
       <div class="hero__content">
         <p class="eyebrow">Интерактивный тест</p>
@@ -30,14 +35,39 @@
           </div>
         </div>
         <div class="hero__actions">
-          <a class="subject-link subject-link--active" href="./index.html">География</a>
-          <a class="subject-link" href="./тест про исторю/index.html">История</a>
           <button id="langRu" class="chip chip--active" type="button">Русский</button>
           <button id="langKg" class="chip" type="button">Кыргызча</button>
           <button id="startBtn" class="primary-btn" type="button">Начать тест</button>
         </div>
       </div>
     </header>
+
+    <section class="study-hub">
+      <div class="study-hub__header">
+        <p class="eyebrow">Подготовка к госэкзаменам</p>
+        <h2>Открой нужный предмет и тренируйся без лишней путаницы</h2>
+        <p class="study-hub__text">
+          Сайт помогает готовиться по шагам: выбрать предмет, пройти вариант, увидеть ошибки и вернуться к слабым темам.
+        </p>
+      </div>
+      <div class="study-grid">
+        <a class="study-card study-card--active" href="./index.html">
+          <span class="study-card__tag">География</span>
+          <strong>180 вопросов</strong>
+          <span>Тест по основным темам и быстрый разбор результатов.</span>
+        </a>
+        <a class="study-card" href="./тест про исторю/index.html">
+          <span class="study-card__tag">История</span>
+          <strong>200 вопросов</strong>
+          <span>Тренировка по истории Кыргызстана в экзаменационном формате.</span>
+        </a>
+        <a class="study-card" href="./kyrgyz/index.html">
+          <span class="study-card__tag">Кыргыз тили / адабияты</span>
+          <strong>B1 и B2</strong>
+          <span>Отдельные предметы и уровни в одном удобном разделе.</span>
+        </a>
+      </div>
+    </section>
 
     <main class="layout">
       <aside class="sidebar">
@@ -87,6 +117,15 @@
           <p class="small-text">
             Сайт запоминает выбранные варианты, показывает прогресс по всем 180 вопросам и в конце сразу считает результат.
           </p>
+        </div>
+
+        <div class="panel prep-panel">
+          <h2>Как готовиться</h2>
+          <ol class="prep-list">
+            <li>Начинай с 20–40 вопросов, чтобы спокойно войти в тему.</li>
+            <li>После результата смотри ошибки и возвращайся к ним ещё раз.</li>
+            <li>Перед экзаменом проходи полный вариант в случайном порядке.</li>
+          </ol>
         </div>
       </aside>
 

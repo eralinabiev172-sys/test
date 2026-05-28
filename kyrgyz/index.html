@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кыргыз тили жана адабияты — B1 / B2</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="site-nav" aria-label="Сайттын бөлүмдөрү">
+      <a class="site-nav__link" href="../index.html">География</a>
+      <a class="site-nav__link" href="../тест про исторю/index.html">Тарых</a>
+      <a class="site-nav__link site-nav__link--active" href="./index.html">Кыргыз тили</a>
+    </nav>
+    <header class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Интерактивдүү тест</p>
+        <h1>Кыргыз тили жана адабияты</h1>
+        <p class="hero__text">
+          Предметти танда, анан B1 же B2 деңгээлин ачып, кыргыз тили же кыргыз адабияты боюнча
+          суроолорду иштеп, жыйынтыкты дароо көр.
+        </p>
+        <div class="hero__stats">
+          <div class="hero-stat">
+            <span class="hero-stat__value" id="heroQuestionCount">—</span>
+            <span class="hero-stat__label">суроолор</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat__value">2</span>
+            <span class="hero-stat__label">деңгээл</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat__value">1</span>
+            <span class="hero-stat__label">жыйынтык</span>
+          </div>
+        </div>
+        <div class="hero__actions">
+          <button id="subjectLanguageBtn" class="chip chip--active" type="button">Кыргыз тили</button>
+          <button id="subjectLiteratureBtn" class="chip" type="button">Кыргыз адабияты</button>
+          <button id="levelB1Btn" class="chip chip--active" type="button">B1</button>
+          <button id="levelB2Btn" class="chip" type="button">B2</button>
+          <button id="randomToggleBtn" class="chip" type="button">Туш келди: күйүк</button>
+          <button id="startBtn" class="primary-btn" type="button">Тестти баштоо</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="panel control-panel">
+          <h2>Жүрүш</h2>
+          <p id="progressText">0 из 0 отвечено</p>
+          <div class="progress">
+            <div id="progressBar" class="progress__bar"></div>
+          </div>
+          <div class="progress-meta">
+            <span id="answeredCount" class="meta-pill">0 отвечено</span>
+            <span id="remainingCount" class="meta-pill">0 осталось</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Сабак</h2>
+          <p class="small-text">Кыргыз тили жана кыргыз адабияты үчүн өзүнчө тесттер.</p>
+        </div>
+
+        <div class="panel">
+          <h2>Даража</h2>
+          <p class="small-text">Жаңы вариантты баштаар алдында B1 же B2 деңгээлин тандайсың.</p>
+          <button id="resetLevelBtn" class="secondary-btn" type="button">Даражаны кайра баштоо</button>
+          <button id="finishBtn" class="primary-btn" type="button">Аяктоо</button>
+          <button id="resetBtn" class="ghost-btn" type="button">Тазалоо</button>
+        </div>
+
+        <div class="panel prep-panel">
+          <h2>Кантип даярдануу керек</h2>
+          <ol class="prep-list">
+            <li>Адегенде предметти, анан B1 же B2 деңгээлин танда.</li>
+            <li>Жыйынтыктан кийин ката кеткен суроолорго кайра кайрыл.</li>
+            <li>Экзаменге чейин толук вариантты 100–200 суроо менен иштеп чык.</li>
+          </ol>
+        </div>
+
+        <div class="panel">
+          <h2 id="questionMapTitle">Суроолор картасы</h2>
+          <p id="questionMapHint" class="small-text">Тез өтүү үчүн номерди бас</p>
+          <div id="questionMap" class="question-map"></div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div id="statusBanner" class="status-banner">
+          «Тестти баштоо» баскычын басып, суроолорду жүктө.
+        </div>
+
+        <div id="quizCard" class="quiz-card hidden">
+          <div class="quiz-card__top">
+            <span id="questionCounter" class="question-counter"></span>
+            <span id="questionNumberBadge" class="question-badge"></span>
+          </div>
+          <h2 id="questionTitle" class="question-title"></h2>
+          <div id="optionsList" class="options-list"></div>
+          <div class="quiz-nav">
+            <button id="inlinePrevBtn" class="secondary-btn quiz-nav__button" type="button">Артка</button>
+            <button id="inlineNextBtn" class="primary-btn quiz-nav__button" type="button">Кийинки</button>
+          </div>
+        </div>
+
+        <div id="resultCard" class="result-card hidden">
+          <h2 id="resultTitle">Сенин жоопторуң</h2>
+          <p id="resultScore" class="result-score"></p>
+          <p id="resultSummary" class="result-summary"></p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Суроо</th>
+                  <th>Сенин жооп</th>
+                  <th>Туура жооп</th>
+                </tr>
+              </thead>
+              <tbody id="resultBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./questions.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
