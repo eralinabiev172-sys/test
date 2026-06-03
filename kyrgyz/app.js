@@ -1,33 +1,21 @@
-const data = window.kyrgyzTests || {};
+const sourceQuestions = Array.isArray(window.kyrgyzTests?.language?.B1) ? window.kyrgyzTests.language.B1 : [];
 
 const state = {
-  subject: "language",
-  level: "B1",
   started: false,
-  currentIndex: 0,
-  answers: {},
   showingResults: false,
-  randomMode: true
+  currentIndex: 0,
+  randomMode: true,
+  questions: [],
+  answers: {}
 };
 
 const ui = {
-  subjectLanguageBtn: document.getElementById("subjectLanguageBtn"),
-  subjectLiteratureBtn: document.getElementById("subjectLiteratureBtn"),
-  levelB1Btn: document.getElementById("levelB1Btn"),
-  levelB2Btn: document.getElementById("levelB2Btn"),
   randomToggleBtn: document.getElementById("randomToggleBtn"),
   startBtn: document.getElementById("startBtn"),
-  resetLevelBtn: document.getElementById("resetLevelBtn"),
   finishBtn: document.getElementById("finishBtn"),
   resetBtn: document.getElementById("resetBtn"),
-  heroQuestionCount: document.getElementById("heroQuestionCount"),
   statusBanner: document.getElementById("statusBanner"),
-  quizCard: document.getElementById("quizCard"),
-  resultCard: document.getElementById("resultCard"),
-  questionCounter: document.getElementById("questionCounter"),
-  questionNumberBadge: document.getElementById("questionNumberBadge"),
-  questionTitle: document.getElementById("questionTitle"),
-  optionsList: document.getElementById("optionsList"),
+  heroQuestionCount: document.getElementById("heroQuestionCount"),
   progressText: document.getElementById("progressText"),
   progressBar: document.getElementById("progressBar"),
   answeredCount: document.getElementById("answeredCount"),
@@ -35,41 +23,45 @@ const ui = {
   questionMapTitle: document.getElementById("questionMapTitle"),
   questionMapHint: document.getElementById("questionMapHint"),
   questionMap: document.getElementById("questionMap"),
+  quizCard: document.getElementById("quizCard"),
+  resultCard: document.getElementById("resultCard"),
+  questionCounter: document.getElementById("questionCounter"),
+  questionNumberBadge: document.getElementById("questionNumberBadge"),
+  questionTitle: document.getElementById("questionTitle"),
+  optionsList: document.getElementById("optionsList"),
+  inlinePrevBtn: document.getElementById("inlinePrevBtn"),
+  inlineNextBtn: document.getElementById("inlineNextBtn"),
   resultTitle: document.getElementById("resultTitle"),
   resultScore: document.getElementById("resultScore"),
   resultSummary: document.getElementById("resultSummary"),
-  resultBody: document.getElementById("resultBody"),
-  inlinePrevBtn: document.getElementById("inlinePrevBtn"),
-  inlineNextBtn: document.getElementById("inlineNextBtn")
+  resultBody: document.getElementById("resultBody")
 };
 
-const optionLabels = ["А", "Б", "В", "Г", "Д"];
+const letters = ["А", "Б", "В", "Г"];
 
 function getQuestions() {
-  const subjectData = data[state.subject] || {};
-  return Array.isArray(subjectData[state.level]) ? subjectData[state.level] : [];
+  return state.started && state.questions.length ? state.questions : sourceQuestions;
 }
 
-function getVariantQuestions() {
-  const questions = [...getQuestions()];
-  if (!state.randomMode) {
-    return questions;
-  }
-
-  for (let index = questions.length - 1; index > 0; index -= 1) {
+function shuffle(list) {
+  const items = [...list];
+  for (let index = items.length - 1; index > 0; index -= 1) {
     const swapIndex = Math.floor(Math.random() * (index + 1));
-    [questions[index], questions[swapIndex]] = [questions[swapIndex], questions[index]];
+    [items[index], items[swapIndex]] = [items[swapIndex], items[index]];
   }
-
-  return questions;
+  return items;
 }
 
-function getCurrentQuestion() {
-  return getQuestions()[state.currentIndex] || null;
+function setBanner(text) {
+  ui.statusBanner.textContent = text;
 }
 
 function getAnsweredCount() {
   return Object.keys(state.answers).length;
+}
+
+function optionLetter(index) {
+  return letters[index] || String(index + 1);
 }
 
 function escapeHtml(value) {
@@ -81,88 +73,16 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
-function optionLetter(index) {
-  return optionLabels[index] || String(index + 1);
-}
-
-function getSubjectLabel() {
-  return state.subject === "literature" ? "Кыргыз адабияты" : "Кыргыз тили";
-}
-
-function setBanner(message) {
-  ui.statusBanner.textContent = message;
-}
-
-function updateSelectionButtons() {
-  ui.subjectLanguageBtn.classList.toggle("chip--active", state.subject === "language");
-  ui.subjectLiteratureBtn.classList.toggle("chip--active", state.subject === "literature");
-  ui.levelB1Btn.classList.toggle("chip--active", state.level === "B1");
-  ui.levelB2Btn.classList.toggle("chip--active", state.level === "B2");
+function updateControls() {
   ui.randomToggleBtn.textContent = state.randomMode ? "Туш келди: күйүк" : "Туш келди: өчүк";
-  ui.heroQuestionCount.textContent = String(getQuestions().length);
-}
-
-function resetSession() {
-  state.started = false;
-  state.currentIndex = 0;
-  state.answers = {};
-  state.showingResults = false;
-  state.questions = [];
-  ui.resultCard.classList.add("hidden");
-  ui.quizCard.classList.add("hidden");
-  setBanner("«Тестти баштоо» баскычын басып, суроолорду жүктө.");
-  renderProgress();
-  renderQuestionMap();
-}
-
-function setSubject(subject) {
-  if (!data[subject]) {
-    return;
-  }
-
-  state.subject = subject;
-  updateSelectionButtons();
-  resetSession();
-  setBanner(`Тандалды: ${getSubjectLabel()}.`);
-}
-
-function setLevel(level) {
-  const subjectData = data[state.subject] || {};
-  if (!subjectData[level]) {
-    return;
-  }
-
-  state.level = level;
-  updateSelectionButtons();
-  resetSession();
-  setBanner(`Тандалды: ${getSubjectLabel()} · деңгээл ${level}. «Тестти баштоо» баскычын бас.`);
-}
-
-function startQuiz() {
-  const questions = getVariantQuestions();
-  if (!questions.length) {
-    setBanner("Бул деңгээл үчүн азырынча суроолор жок.");
-    return;
-  }
-
-  state.started = true;
-  state.showingResults = false;
-  state.currentIndex = 0;
-  state.answers = {};
-  state.questions = questions;
-  ui.resultCard.classList.add("hidden");
-  ui.quizCard.classList.remove("hidden");
-  setBanner(`Тема ${getSubjectLabel()} · деңгээл ${state.level} жүктөлдү. Жооп тандап, кийинки суроого өт.`);
-  renderQuestion();
-  renderProgress();
-  renderQuestionMap();
+  ui.heroQuestionCount.textContent = String(sourceQuestions.length);
 }
 
 function renderProgress() {
   const total = getQuestions().length;
   const answered = getAnsweredCount();
   const remaining = Math.max(total - answered, 0);
-  const percent = total > 0 ? Math.round((answered / total) * 100) : 0;
+  const percent = total ? Math.round((answered / total) * 100) : 0;
 
   ui.progressText.textContent = `${answered} / ${total} жооп берилди`;
   ui.progressBar.style.width = `${percent}%`;
@@ -171,14 +91,14 @@ function renderProgress() {
 }
 
 function renderQuestionMap() {
-  const questions = state.started && Array.isArray(state.questions) && state.questions.length ? state.questions : getQuestions();
+  const questions = getQuestions();
   ui.questionMap.innerHTML = "";
 
   questions.forEach((question, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "map-button";
-    if (index === state.currentIndex && state.started && !state.showingResults) {
+    if (state.started && !state.showingResults && index === state.currentIndex) {
       button.classList.add("map-button--current");
     }
     if (Object.prototype.hasOwnProperty.call(state.answers, index)) {
@@ -186,9 +106,9 @@ function renderQuestionMap() {
     }
     button.textContent = String(question.number || index + 1);
     button.addEventListener("click", () => {
-      state.currentIndex = index;
       state.started = true;
       state.showingResults = false;
+      state.currentIndex = index;
       ui.quizCard.classList.remove("hidden");
       ui.resultCard.classList.add("hidden");
       renderQuestion();
@@ -199,8 +119,8 @@ function renderQuestionMap() {
 }
 
 function renderQuestion() {
-  const questions = state.started && Array.isArray(state.questions) && state.questions.length ? state.questions : getQuestions();
-  const question = questions[state.currentIndex] || null;
+  const questions = getQuestions();
+  const question = questions[state.currentIndex];
 
   if (!question) {
     ui.questionCounter.textContent = "";
@@ -227,9 +147,8 @@ function renderQuestion() {
     input.checked = state.answers[state.currentIndex] === index;
     input.addEventListener("change", () => {
       state.answers[state.currentIndex] = index;
-      renderQuestion();
-      renderProgress();
       renderQuestionMap();
+      renderProgress();
     });
 
     const label = document.createElement("label");
@@ -242,23 +161,64 @@ function renderQuestion() {
     optionWrap.appendChild(label);
     ui.optionsList.appendChild(optionWrap);
   });
+
+  ui.inlinePrevBtn.disabled = state.currentIndex === 0;
+  ui.inlineNextBtn.disabled = state.currentIndex === questions.length - 1;
+}
+
+function goToQuestion(direction) {
+  const questions = getQuestions();
+  const nextIndex = state.currentIndex + direction;
+  if (nextIndex < 0 || nextIndex >= questions.length) {
+    return;
+  }
+  state.currentIndex = nextIndex;
+  renderQuestion();
+  renderQuestionMap();
+}
+
+function startQuiz() {
+  if (!sourceQuestions.length) {
+    setBanner("Суроолор азырынча жүктөлгөн жок.");
+    return;
+  }
+
+  state.started = true;
+  state.showingResults = false;
+  state.currentIndex = 0;
+  state.answers = {};
+  state.questions = state.randomMode ? shuffle(sourceQuestions) : [...sourceQuestions];
+  ui.quizCard.classList.remove("hidden");
+  ui.resultCard.classList.add("hidden");
+  setBanner("Кыргыз тили — B1 тести жүктөлдү. Жооп тандап, кийинки суроого өт.");
+  renderQuestion();
+  renderProgress();
+  renderQuestionMap();
+}
+
+function resetSession() {
+  state.started = false;
+  state.showingResults = false;
+  state.currentIndex = 0;
+  state.questions = [];
+  state.answers = {};
+  ui.quizCard.classList.add("hidden");
+  ui.resultCard.classList.add("hidden");
+  setBanner("«Тестти баштоо» баскычын басып, суроолорду жүктө.");
+  renderProgress();
+  renderQuestionMap();
 }
 
 function countResults() {
-  const questions = state.started && Array.isArray(state.questions) && state.questions.length ? state.questions : getQuestions();
+  const questions = getQuestions();
   let correct = 0;
   let wrong = 0;
   let unanswered = 0;
-  let ungraded = 0;
 
   questions.forEach((question, index) => {
     const answer = state.answers[index];
     if (answer === undefined) {
       unanswered += 1;
-      return;
-    }
-    if (!Number.isInteger(question.correctIndex)) {
-      ungraded += 1;
       return;
     }
     if (answer === question.correctIndex) {
@@ -268,35 +228,33 @@ function countResults() {
     }
   });
 
-  return { correct, wrong, unanswered, ungraded };
+  return { correct, wrong, unanswered };
 }
 
-function renderResults() {
-  const questions = state.started && Array.isArray(state.questions) && state.questions.length ? state.questions : getQuestions();
-  const { correct, wrong, unanswered, ungraded } = countResults();
-  const total = questions.length;
-  const scored = total - ungraded;
-  const percent = scored > 0 ? Math.round((correct / scored) * 100) : 0;
+function showResults() {
+  const questions = getQuestions();
+  const { correct, wrong, unanswered } = countResults();
   const answered = getAnsweredCount();
 
+  state.showingResults = true;
   ui.quizCard.classList.add("hidden");
   ui.resultCard.classList.remove("hidden");
-  state.showingResults = true;
 
-  ui.resultTitle.textContent = `Жыйынтык · ${getSubjectLabel()} · ${state.level}`;
-  ui.resultScore.textContent = `${correct} / ${scored} туура · ${percent}%`;
-  ui.resultSummary.textContent =
-    `Жооп берилди: ${answered} / ${total}. Туура: ${correct}. Туура эмес: ${wrong}. ` +
-    `Жоопсуз: ${unanswered}. Ачкычсыз: ${ungraded}.`;
-
+  ui.resultScore.textContent = `${correct} / ${questions.length}`;
+  ui.resultSummary.textContent = `Жооп берилди: ${answered}. Туура: ${correct}. Туура эмес: ${wrong}. Жоопсуз: ${unanswered}.`;
   ui.resultBody.innerHTML = "";
+
   questions.forEach((question, index) => {
     const answer = state.answers[index];
-    const row = document.createElement("tr");
-    const selectedText = answer === undefined ? "Жооп жок" : `${optionLetter(answer)} · ${question.options[answer] || ""}`;
+    const selectedText = answer === undefined
+      ? "Жооп жок"
+      : `${optionLetter(answer)} · ${question.options[answer] || ""}`;
     const correctText = Number.isInteger(question.correctIndex)
       ? `${optionLetter(question.correctIndex)} · ${question.options[question.correctIndex] || ""}`
-      : "Жооп ачкычы жок";
+      : "—";
+
+    const row = document.createElement("tr");
+    row.className = answer === question.correctIndex ? "result-row--correct" : "result-row--wrong";
     row.innerHTML = `
       <td>${question.number || index + 1}</td>
       <td>${escapeHtml(question.text)}</td>
@@ -305,38 +263,29 @@ function renderResults() {
     `;
     ui.resultBody.appendChild(row);
   });
+
+  setBanner("Жыйынтык даяр. Кааласаң, кайра баштасаң болот.");
 }
 
-function moveQuestion(direction) {
-  const questions = state.started && Array.isArray(state.questions) && state.questions.length ? state.questions : getQuestions();
-  if (!questions.length) {
+ui.startBtn.addEventListener("click", startQuiz);
+ui.finishBtn.addEventListener("click", () => {
+  if (!state.started) {
+    setBanner("Адегенде тестти башта.");
     return;
   }
-
-  state.currentIndex = Math.max(0, Math.min(state.currentIndex + direction, questions.length - 1));
-  state.started = true;
-  state.showingResults = false;
-  ui.resultCard.classList.add("hidden");
-  ui.quizCard.classList.remove("hidden");
-  renderQuestion();
-  renderQuestionMap();
-}
-
-ui.subjectLanguageBtn.addEventListener("click", () => setSubject("language"));
-ui.subjectLiteratureBtn.addEventListener("click", () => setSubject("literature"));
-ui.levelB1Btn.addEventListener("click", () => setLevel("B1"));
-ui.levelB2Btn.addEventListener("click", () => setLevel("B2"));
+  showResults();
+});
+ui.resetBtn.addEventListener("click", resetSession);
 ui.randomToggleBtn.addEventListener("click", () => {
   state.randomMode = !state.randomMode;
-  updateSelectionButtons();
-  resetSession();
+  updateControls();
+  if (!state.started) {
+    return;
+  }
+  setBanner(state.randomMode ? "Туш келди тартип күйгүзүлдү." : "Туш келди тартип өчүрүлдү.");
 });
-ui.startBtn.addEventListener("click", startQuiz);
-ui.resetLevelBtn.addEventListener("click", () => setLevel(state.level));
-ui.finishBtn.addEventListener("click", renderResults);
-ui.resetBtn.addEventListener("click", resetSession);
-ui.inlinePrevBtn.addEventListener("click", () => moveQuestion(-1));
-ui.inlineNextBtn.addEventListener("click", () => moveQuestion(1));
+ui.inlinePrevBtn.addEventListener("click", () => goToQuestion(-1));
+ui.inlineNextBtn.addEventListener("click", () => goToQuestion(1));
 
-updateSelectionButtons();
+updateControls();
 resetSession();

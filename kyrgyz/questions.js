@@ -1,4 +1,4 @@
-window.kyrgyzTests = {
+﻿window.kyrgyzTests = {
   "language": {
     "B1": [
       {
@@ -10,7 +10,7 @@ window.kyrgyzTests = {
           "айтылышы боюнча",
           "үндүн узундугу жана сөздүн маанисин ажыраткандыгы боюнча"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 2,
@@ -21,7 +21,7 @@ window.kyrgyzTests = {
           "үнсүздөр",
           "үндүү жана үнсүз тыбыштар"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 3,
@@ -32,7 +32,7 @@ window.kyrgyzTests = {
           "жоон-жон, коон-кон",
           "алма, акча, аста, ачка"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 4,
@@ -43,7 +43,7 @@ window.kyrgyzTests = {
           "Кыргызстан",
           "Кыргызстандын"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 5,
@@ -54,7 +54,7 @@ window.kyrgyzTests = {
           "тыбыштык түзүлүшү бирдей, бирок мааниси ар башка",
           "составы жагынан эки же андан көп компоненттерден турган"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 6,
@@ -65,7 +65,7 @@ window.kyrgyzTests = {
           "шарт, жай, кыйчылдап",
           "акырын, жай"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 7,
@@ -76,7 +76,7 @@ window.kyrgyzTests = {
           "жаргон",
           "лексика"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 8,
@@ -87,7 +87,7 @@ window.kyrgyzTests = {
           "мекенимде",
           "мекениме"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 9,
@@ -98,7 +98,7 @@ window.kyrgyzTests = {
           "аныктооч, толуктооч, бышыктооч",
           "аныктооч, баяндооч, толуктооч, ээ"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 10,
@@ -109,7 +109,7 @@ window.kyrgyzTests = {
           "баарын",
           "баары"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 11,
@@ -120,7 +120,7 @@ window.kyrgyzTests = {
           "ишиңизден",
           "ишиңизди"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 12,
@@ -131,7 +131,7 @@ window.kyrgyzTests = {
           "кыймыл-аракетти",
           "заттын атын"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 13,
@@ -142,7 +142,7 @@ window.kyrgyzTests = {
           "тарыхый сөздөр",
           "лексика"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 14,
@@ -153,7 +153,7 @@ window.kyrgyzTests = {
           "түштүк, чыгыш",
           "түндүк, түштүк"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 15,
@@ -164,7 +164,7 @@ window.kyrgyzTests = {
           "ийтербе, аш, растап, ака, зор",
           "дилде, динар, зээр, соот, чарайна"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 16,
@@ -175,7 +175,7 @@ window.kyrgyzTests = {
           "1 май",
           "XX-кылым"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 17,
@@ -186,7 +186,7 @@ window.kyrgyzTests = {
           "жөндөмө",
           "туруктуу"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 18,
@@ -197,7 +197,7 @@ window.kyrgyzTests = {
           "ыраазысың",
           "ыраазы"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 19,
@@ -208,7 +208,7 @@ window.kyrgyzTests = {
           "эмессиң",
           "эмес"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 20,
@@ -219,7 +219,7 @@ window.kyrgyzTests = {
           "мен андан көп нерселерди үйрөндүм",
           "ал эч кимден жалтанбады"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 21,
@@ -230,7 +230,7 @@ window.kyrgyzTests = {
           "кайсы бирин айтайын, кимдир бирөөнүн каарына калган көрүнөт",
           "күндүр-түндүр мал короодо жүрө берет"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 22,
@@ -241,7 +241,7 @@ window.kyrgyzTests = {
           "арча, алтын, алма, асел",
           "көз, сөз, ат"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 23,
@@ -252,7 +252,7 @@ window.kyrgyzTests = {
           "ким",
           "эмнеси"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 24,
@@ -263,7 +263,7 @@ window.kyrgyzTests = {
           "энчилүү аттарды",
           "кесиптик лексиканы"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 25,
@@ -274,7 +274,7 @@ window.kyrgyzTests = {
           "КРдин, УИАнын, КУУнин",
           "УАКтын, матфак, БУУнун"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 26,
@@ -285,7 +285,7 @@ window.kyrgyzTests = {
           "өзүм",
           "өзүңүз"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 27,
@@ -296,7 +296,7 @@ window.kyrgyzTests = {
           "канча",
           "кандай"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 28,
@@ -307,7 +307,7 @@ window.kyrgyzTests = {
           "агарот, герб, жүрөт",
           "турат, кеген, казыр"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 29,
@@ -318,7 +318,7 @@ window.kyrgyzTests = {
           "Тигиге",
           "Тигиде"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 30,
@@ -329,7 +329,7 @@ window.kyrgyzTests = {
           "түшүндүрмө сөздүк",
           "терминологиялык сөздүк"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 31,
@@ -340,7 +340,7 @@ window.kyrgyzTests = {
           "Силер да, мен да – баарыбыз мекенибизди сүйөбүз",
           "Асыл – таштан, акыл-жаштан"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 32,
@@ -351,7 +351,7 @@ window.kyrgyzTests = {
           "Келиңиз",
           "Кечиресиз"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 33,
@@ -362,7 +362,7 @@ window.kyrgyzTests = {
           "ыңгайлуу",
           "пайдалуу"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 34,
@@ -373,7 +373,7 @@ window.kyrgyzTests = {
           "туралы",
           "жүрөлү"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 35,
@@ -384,7 +384,7 @@ window.kyrgyzTests = {
           "толеранттуулук, интернет, модератор",
           "айпи телефон, аялдама"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 36,
@@ -395,7 +395,7 @@ window.kyrgyzTests = {
           "Бийик",
           "Алыс"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 37,
@@ -406,7 +406,7 @@ window.kyrgyzTests = {
           "мурдун балта кеспеген",
           "куурай башын сындырбоо"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 38,
@@ -417,7 +417,7 @@ window.kyrgyzTests = {
           "бердим",
           "алдым"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 39,
@@ -428,7 +428,7 @@ window.kyrgyzTests = {
           "мандаш, көрөнгө",
           "сылаңкороз, өргө"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 40,
@@ -439,7 +439,7 @@ window.kyrgyzTests = {
           "курсташ, тамырлаш, замандаш",
           "теңтуш, замандаш, курдаш"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 41,
@@ -450,7 +450,7 @@ window.kyrgyzTests = {
           "ичи өрт менен жалын болуу",
           "төбөсү көккө жетүү"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 42,
@@ -461,7 +461,7 @@ window.kyrgyzTests = {
           "аткарабыз",
           "иштейбиз"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 43,
@@ -472,7 +472,7 @@ window.kyrgyzTests = {
           "уктаңыз",
           "болуңуз"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 44,
@@ -483,7 +483,7 @@ window.kyrgyzTests = {
           "тырмыш, уруш",
           "турмуш, согуш"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 45,
@@ -494,7 +494,7 @@ window.kyrgyzTests = {
           "көргүлө",
           "айткыла"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 46,
@@ -505,7 +505,7 @@ window.kyrgyzTests = {
           "берип",
           "кайтарып"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 47,
@@ -516,7 +516,7 @@ window.kyrgyzTests = {
           "бир эле сөздүн бир нече мааниге ээ болушу",
           "карама-каршы мааниде колдонулган сөздөр"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 48,
@@ -527,7 +527,7 @@ window.kyrgyzTests = {
           "көзү каныгуу, иштин көзүн таануу",
           "кумурсканын улутунганын билүү, тогуз толгонуу"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 49,
@@ -538,7 +538,7 @@ window.kyrgyzTests = {
           "ооба",
           "жарайт"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 50,
@@ -549,7 +549,7 @@ window.kyrgyzTests = {
           "четинде",
           "ичинде"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 51,
@@ -560,7 +560,7 @@ window.kyrgyzTests = {
           "Жакшы таап айтат, жаман каап айтат",
           "Айтылган сөз акыл болсо, уккан кулак макул болот"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 52,
@@ -571,7 +571,7 @@ window.kyrgyzTests = {
           "дүкөндө",
           "борборунда"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 53,
@@ -582,7 +582,7 @@ window.kyrgyzTests = {
           "канаттуу, арык чырай, каада-салт",
           "кийим-кече, кыз-кыркын, кызыл чийкил"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 54,
@@ -593,7 +593,7 @@ window.kyrgyzTests = {
           "баары",
           "баарына"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 55,
@@ -604,7 +604,7 @@ window.kyrgyzTests = {
           "бирге барышат",
           "чогуу жүрүшөт"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 56,
@@ -615,7 +615,7 @@ window.kyrgyzTests = {
           "көчөсүнө",
           "үйүнө"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 57,
@@ -626,7 +626,7 @@ window.kyrgyzTests = {
           "байланыштуу кепти",
           "энчилүү аттарды"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 58,
@@ -637,7 +637,7 @@ window.kyrgyzTests = {
           "Кара-Кол, Ысыката",
           "Торугарт, Ак-Сай"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 59,
@@ -648,7 +648,7 @@ window.kyrgyzTests = {
           "Ыя, качан келдиң дейсиңби?",
           "Ооба биринчи курста окуйм"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 60,
@@ -659,7 +659,7 @@ window.kyrgyzTests = {
           "Көпчүлүк кол тийгизген эмгек ушундай үзүрлүү берекелүү болот, жарайсыңар, азаматтар",
           "Кыш суук катуу, ак кар көк муз"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 61,
@@ -670,7 +670,7 @@ window.kyrgyzTests = {
           "тактооч, атооч",
           "сырдык сөз, тууранды сөз"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 62,
@@ -681,7 +681,7 @@ window.kyrgyzTests = {
           "жооп берет",
           "жардам берет"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 63,
@@ -692,7 +692,7 @@ window.kyrgyzTests = {
           "Катар мамлекети, Болгар шаары",
           "Ирак Республикасы, Израиль мамлекети"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 64,
@@ -703,7 +703,7 @@ window.kyrgyzTests = {
           "эки жана үч муундуу сөздөр",
           "бир муундуу жана баш тамгаларынан кыскартылган сөздөр"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 65,
@@ -714,7 +714,7 @@ window.kyrgyzTests = {
           "ичине кара таруу айланбаган",
           "атка жеңил, тайга чак"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 66,
@@ -725,7 +725,7 @@ window.kyrgyzTests = {
           "өзгөчө",
           "татаал"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 67,
@@ -736,7 +736,7 @@ window.kyrgyzTests = {
           "жоош, момун",
           "сүйүнүү, кубануу"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 68,
@@ -747,7 +747,7 @@ window.kyrgyzTests = {
           "күчтүү",
           "чоң"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 69,
@@ -758,7 +758,7 @@ window.kyrgyzTests = {
           "иштерди угат",
           "ойлорго келет"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 70,
@@ -769,7 +769,7 @@ window.kyrgyzTests = {
           "такшалган, машыккан, бышкан, каныккан",
           "ырахаттанган, кумарланган, таасирленген"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 71,
@@ -780,7 +780,7 @@ window.kyrgyzTests = {
           "сүйөбүз",
           "сурайбыз"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 72,
@@ -791,7 +791,7 @@ window.kyrgyzTests = {
           "Айран ичкен кутулуп, челек жалаган тутулат; Көп түкүрсө көл болот",
           "Өнөр алды – кызыл тил; Бөрү койго тойбойт, адам ойго тойбойт"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 73,
@@ -802,7 +802,7 @@ window.kyrgyzTests = {
           "билип",
           "туура"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 74,
@@ -813,7 +813,7 @@ window.kyrgyzTests = {
           "жашыраак, тамашакөйрөөк, кара тору, сабырдуу, элпек",
           "арык, семиз, кыска, узун, татынакай, келбеттүү, далылуу"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 75,
@@ -824,7 +824,7 @@ window.kyrgyzTests = {
           "ылдам-бат",
           "теңтуш-курдаш"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 76,
@@ -835,7 +835,7 @@ window.kyrgyzTests = {
           "Араб, англис, латын, орус",
           "Араб, латын, орус, украин"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 77,
@@ -846,7 +846,7 @@ window.kyrgyzTests = {
           "говорлор, жаргондор",
           "диалектилер"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 78,
@@ -857,7 +857,7 @@ window.kyrgyzTests = {
           "макалаңыз",
           "макала"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 79,
@@ -868,7 +868,7 @@ window.kyrgyzTests = {
           "ошон үчүн",
           "кантсе да"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 80,
@@ -879,7 +879,7 @@ window.kyrgyzTests = {
           "саатыңар",
           "сааты"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 81,
@@ -890,7 +890,7 @@ window.kyrgyzTests = {
           "сугарылбаган",
           "сакталган"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 82,
@@ -901,7 +901,7 @@ window.kyrgyzTests = {
           "Б.Жамгырчинов",
           "И.Раззаков"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 83,
@@ -912,7 +912,7 @@ window.kyrgyzTests = {
           "катыбыз",
           "катыңыз"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 84,
@@ -923,7 +923,7 @@ window.kyrgyzTests = {
           "синоним",
           "фразеологизм"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 85,
@@ -934,7 +934,7 @@ window.kyrgyzTests = {
           "опур-топур, кымгуут",
           "жаздык, жууркан"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 86,
@@ -945,7 +945,7 @@ window.kyrgyzTests = {
           "суроолуу",
           "илептүү"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 87,
@@ -956,7 +956,7 @@ window.kyrgyzTests = {
           "Жардамдашып койгулачы!",
           "Ким келди?"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 88,
@@ -967,7 +967,7 @@ window.kyrgyzTests = {
           "жандоочтор, бөлүкчөлөр, элес тууранды сөздөр",
           "байламталар, каратма сөздөр, киринди сөздөр"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 89,
@@ -978,7 +978,7 @@ window.kyrgyzTests = {
           "Кош, апаке, көрүшкөнчө аман тур!",
           "Ал мурункудай эмес"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 90,
@@ -989,7 +989,7 @@ window.kyrgyzTests = {
           "көрсө",
           "болжолу"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 91,
@@ -1000,7 +1000,7 @@ window.kyrgyzTests = {
           "6",
           "4"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 92,
@@ -1011,7 +1011,7 @@ window.kyrgyzTests = {
           "депутат, сессия",
           "ырахмат, ырас"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 93,
@@ -1022,7 +1022,7 @@ window.kyrgyzTests = {
           "ысык-суук, жылуу",
           "жаан, жамгыр, нөшөр"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 94,
@@ -1033,7 +1033,7 @@ window.kyrgyzTests = {
           "антонимдер",
           "көп маанилүү сөздөр"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 95,
@@ -1044,7 +1044,7 @@ window.kyrgyzTests = {
           "кызыл-тазыл, жашыл",
           "анткени, менен"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 96,
@@ -1055,7 +1055,7 @@ window.kyrgyzTests = {
           "лексика",
           "синтаксис"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 97,
@@ -1066,7 +1066,7 @@ window.kyrgyzTests = {
           "табыш",
           "барыш"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 98,
@@ -1077,7 +1077,7 @@ window.kyrgyzTests = {
           "тактоочтор",
           "сырдык сөз"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 99,
@@ -1088,7 +1088,7 @@ window.kyrgyzTests = {
           "күндө майрам күндө той",
           "акесин таанытуу"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 100,
@@ -1099,7 +1099,7 @@ window.kyrgyzTests = {
           "көп",
           "убакыт"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 101,
@@ -1110,7 +1110,7 @@ window.kyrgyzTests = {
           "чак, жак",
           "ыңгай, мамиле"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 102,
@@ -1121,7 +1121,7 @@ window.kyrgyzTests = {
           "чекит, кош чекит",
           "сызыкча"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 103,
@@ -1132,7 +1132,7 @@ window.kyrgyzTests = {
           "эң, же, өтө, жана",
           "ал, сиз, бул, мен"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 104,
@@ -1143,7 +1143,7 @@ window.kyrgyzTests = {
           "көркөм",
           "илимий"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 105,
@@ -1154,7 +1154,7 @@ window.kyrgyzTests = {
           "тарак",
           "таяк"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 106,
@@ -1165,7 +1165,7 @@ window.kyrgyzTests = {
           "бак-дарак, короо-жай",
           "кызыл -тазыл, ачуу-таттуу"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 107,
@@ -1176,7 +1176,7 @@ window.kyrgyzTests = {
           "бөлүкчө",
           "айкаш"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 108,
@@ -1187,7 +1187,7 @@ window.kyrgyzTests = {
           "күлдүрүп, сүйдүрүп",
           "сүйдүрүп, сүйүнтүп"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 109,
@@ -1198,7 +1198,7 @@ window.kyrgyzTests = {
           "аптека",
           "мектеп"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 110,
@@ -1209,7 +1209,7 @@ window.kyrgyzTests = {
           "китепканада",
           "троллейуста"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 111,
@@ -1220,7 +1220,7 @@ window.kyrgyzTests = {
           "тез",
           "артка"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 112,
@@ -1231,7 +1231,7 @@ window.kyrgyzTests = {
           "бакылда",
           "жарк-журк"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 113,
@@ -1242,7 +1242,7 @@ window.kyrgyzTests = {
           "аныктооч",
           "толуктооч"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 114,
@@ -1253,7 +1253,7 @@ window.kyrgyzTests = {
           "атоочтуктар, кызматчы сөз түркүмү",
           "зат атооч, сын атооч, сан атооч, этиш сөз түркүмү"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 115,
@@ -1264,7 +1264,7 @@ window.kyrgyzTests = {
           "төбөсү көккө жетүү",
           "бирдин айындай чоюлуу"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 116,
@@ -1275,7 +1275,7 @@ window.kyrgyzTests = {
           "сизге",
           "сиздердин"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 117,
@@ -1286,7 +1286,7 @@ window.kyrgyzTests = {
           "расмий-иштиктүү",
           "сүйлөшүү"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 118,
@@ -1297,7 +1297,7 @@ window.kyrgyzTests = {
           "көптөн кийин",
           "баары бир"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 119,
@@ -1308,7 +1308,7 @@ window.kyrgyzTests = {
           "кагаз баштык",
           "карагат кыям (варенье)"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 120,
@@ -1319,7 +1319,7 @@ window.kyrgyzTests = {
           "илимий",
           "прозалык"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 121,
@@ -1330,7 +1330,7 @@ window.kyrgyzTests = {
           "сыр, түш",
           "тебетей, чыптама"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 122,
@@ -1341,7 +1341,7 @@ window.kyrgyzTests = {
           "караба",
           "кейибе"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 123,
@@ -1352,7 +1352,7 @@ window.kyrgyzTests = {
           "басаңдатма",
           "жай"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 124,
@@ -1363,7 +1363,7 @@ window.kyrgyzTests = {
           "дос",
           "шпион"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 125,
@@ -1374,7 +1374,7 @@ window.kyrgyzTests = {
           "кымыз, каттама, айран",
           "кийиз, шырдак, бешбармак"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 126,
@@ -1385,7 +1385,7 @@ window.kyrgyzTests = {
           "цирктин",
           "циркке"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 127,
@@ -1396,7 +1396,7 @@ window.kyrgyzTests = {
           "пионер",
           "флешка"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 128,
@@ -1407,7 +1407,7 @@ window.kyrgyzTests = {
           "Асел татынакай кыз",
           "Жигиттер, кыздарды сыйлагыла"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 129,
@@ -1418,7 +1418,7 @@ window.kyrgyzTests = {
           "өрдөк учту",
           "асманды карады"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 130,
@@ -1429,7 +1429,7 @@ window.kyrgyzTests = {
           "тактооч",
           "этиш"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 131,
@@ -1440,7 +1440,7 @@ window.kyrgyzTests = {
           "чак",
           "көптүк"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 132,
@@ -1451,7 +1451,7 @@ window.kyrgyzTests = {
           "сөз мааниси",
           "кошуу, түзүү"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 133,
@@ -1462,7 +1462,7 @@ window.kyrgyzTests = {
           "кулактандыруу",
           "көркөм баяндоо"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 134,
@@ -1473,7 +1473,7 @@ window.kyrgyzTests = {
           "историзмдер",
           "диалектилер"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 135,
@@ -1484,7 +1484,7 @@ window.kyrgyzTests = {
           "сүрөт музейине",
           "сүрөт музейин"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 136,
@@ -1495,7 +1495,7 @@ window.kyrgyzTests = {
           "илимий стилде",
           "көркөм стилде"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 137,
@@ -1506,7 +1506,7 @@ window.kyrgyzTests = {
           "иш кагаздарынын",
           "илимий"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 138,
@@ -1517,7 +1517,7 @@ window.kyrgyzTests = {
           "мааниси боюнча карама-каршы сөздөр",
           "тыбыштык түзүлүшү бирдей сөздөр"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 139,
@@ -1528,7 +1528,7 @@ window.kyrgyzTests = {
           "карама-каршы мааниде айтылган",
           "айтылышы боюнча айырмаланган, жакын маанилеш"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 140,
@@ -1539,7 +1539,7 @@ window.kyrgyzTests = {
           "илептүү, жайылма, жалаң",
           "жөнөкөй, татаал, жай"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 141,
@@ -1550,7 +1550,7 @@ window.kyrgyzTests = {
           "Сенин атың Бурмабы?",
           "Сенин атың Бурмабы?!"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 142,
@@ -1561,7 +1561,7 @@ window.kyrgyzTests = {
           "аныктооч, толуктооч",
           "аныктооч, толуктооч, бышыктооч"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 143,
@@ -1572,7 +1572,7 @@ window.kyrgyzTests = {
           "зат атооч",
           "этиш"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 144,
@@ -1583,7 +1583,7 @@ window.kyrgyzTests = {
           "жалаң, жайылма",
           "атама, кемтик"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 145,
@@ -1594,7 +1594,7 @@ window.kyrgyzTests = {
           "ээ, баяндооч, айкындооч",
           "аныктооч, толуктооч, баяндооч"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 146,
@@ -1605,7 +1605,7 @@ window.kyrgyzTests = {
           "бир же бир нече грамматикалык негизге ээ болушуна карай",
           "баш мүчөлөрдүн экөө тең катышпаса"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 147,
@@ -1616,7 +1616,7 @@ window.kyrgyzTests = {
           "жалаң жана жайылма",
           "атама жана кемтик"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 148,
@@ -1626,7 +1626,7 @@ window.kyrgyzTests = {
           "көрсө",
           "айылга"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 149,
@@ -1637,7 +1637,7 @@ window.kyrgyzTests = {
           "тактооч",
           "ат атооч"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 150,
@@ -1648,7 +1648,7 @@ window.kyrgyzTests = {
           "толуктооч, баяндооч, ээ",
           "айкындооч, ээ"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 151,
@@ -1658,7 +1658,7 @@ window.kyrgyzTests = {
           "фонема, тыбыш, тамга",
           "сөз айкашы жана сүйлөм"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 152,
@@ -1669,7 +1669,7 @@ window.kyrgyzTests = {
           "сын атооч",
           "этиш"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 153,
@@ -1680,7 +1680,7 @@ window.kyrgyzTests = {
           "атыңды",
           "бергин"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 154,
@@ -1691,7 +1691,7 @@ window.kyrgyzTests = {
           "сөз айкашы, сүйлөм",
           "фразеологизмдер"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 155,
@@ -1702,7 +1702,7 @@ window.kyrgyzTests = {
           "сүйүү, махабат",
           "кара, ак"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 156,
@@ -1713,7 +1713,7 @@ window.kyrgyzTests = {
           "жай",
           "буйрук"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 157,
@@ -1724,7 +1724,7 @@ window.kyrgyzTests = {
           "макал-лакап",
           "драма"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 158,
@@ -1735,7 +1735,7 @@ window.kyrgyzTests = {
           "үтүр",
           "сызыкча"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 159,
@@ -1746,7 +1746,7 @@ window.kyrgyzTests = {
           "этиш",
           "зат атооч"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 160,
@@ -1757,7 +1757,7 @@ window.kyrgyzTests = {
           "баш мүчөлөр",
           "айкындооч мүчөлөр"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 161,
@@ -1768,7 +1768,7 @@ window.kyrgyzTests = {
           "чөп, суу, уй",
           "ата, эне, бала"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 162,
@@ -1779,7 +1779,7 @@ window.kyrgyzTests = {
           "мектепке",
           "Гүлзар"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 163,
@@ -1790,7 +1790,7 @@ window.kyrgyzTests = {
           "тукум",
           "сатып"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 164,
@@ -1801,7 +1801,7 @@ window.kyrgyzTests = {
           "синонимдер",
           "макалдар"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 165,
@@ -1812,7 +1812,7 @@ window.kyrgyzTests = {
           "сөздөрдү муундарга бөлүү",
           "сүйлөм мүчөлөрүнө ажыратуу"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 166,
@@ -1823,7 +1823,7 @@ window.kyrgyzTests = {
           "башкаруу",
           "таандык"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 167,
@@ -1834,7 +1834,7 @@ window.kyrgyzTests = {
           "толуктооч",
           "бышыктооч"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 168,
@@ -1845,7 +1845,7 @@ window.kyrgyzTests = {
           "тең байланыштагы",
           "эки тутумдуу"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 169,
@@ -1856,7 +1856,7 @@ window.kyrgyzTests = {
           "толуктооч",
           "бышыктооч"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 170,
@@ -1867,7 +1867,7 @@ window.kyrgyzTests = {
           "Ким киного барат!",
           "Ким киного барат?!"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 171,
@@ -1878,7 +1878,7 @@ window.kyrgyzTests = {
           "көз, колуна",
           "баш, жанына"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 172,
@@ -1889,7 +1889,7 @@ window.kyrgyzTests = {
           "толуктооч",
           "баяндооч"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 173,
@@ -1900,7 +1900,7 @@ window.kyrgyzTests = {
           "орун бышыктооч",
           "себеп бышыктооч"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 174,
@@ -1911,7 +1911,7 @@ window.kyrgyzTests = {
           "фразеологизмдер",
           "текст"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 175,
@@ -1922,7 +1922,7 @@ window.kyrgyzTests = {
           "киринди сөз",
           "тууранды сөз"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 176,
@@ -1933,7 +1933,7 @@ window.kyrgyzTests = {
           "толуктооч",
           "ээ"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 177,
@@ -1944,7 +1944,7 @@ window.kyrgyzTests = {
           "ээ",
           "баяндооч"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 178,
@@ -1955,7 +1955,7 @@ window.kyrgyzTests = {
           "неологизм",
           "омоним"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 179,
@@ -1966,7 +1966,7 @@ window.kyrgyzTests = {
           "ээси",
           "аныктоочу"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 180,
@@ -1977,7 +1977,7 @@ window.kyrgyzTests = {
           "жалаң",
           "баш"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 181,
@@ -1988,7 +1988,7 @@ window.kyrgyzTests = {
           "тез-тез, өйдө-төмөн",
           "бака-шака, келер-кетер"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 182,
@@ -1999,7 +1999,7 @@ window.kyrgyzTests = {
           "сын-сыпат тактооч",
           "сан-өлчөм тактооч"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 183,
@@ -2010,7 +2010,7 @@ window.kyrgyzTests = {
           "ушуну",
           "кылмак белең"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 184,
@@ -2021,7 +2021,7 @@ window.kyrgyzTests = {
           "өткөн чак",
           "белгисиз өткөн чак"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 185,
@@ -2032,7 +2032,7 @@ window.kyrgyzTests = {
           "байламталар, ат атооч, сын атооч",
           "жандоочтор, этиш сын атооч"
         ],
-        "correctIndex": null
+        "correctIndex": 2
       },
       {
         "number": 186,
@@ -2043,7 +2043,7 @@ window.kyrgyzTests = {
           "жөнөкөй сүйлөм",
           "атама сүйлөм"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 187,
@@ -2054,7 +2054,7 @@ window.kyrgyzTests = {
           "1991-жылы 23-сентябрда",
           "1992-жылы 23-сентябрда"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 188,
@@ -2065,7 +2065,7 @@ window.kyrgyzTests = {
           "туруктуу сөз айкашын",
           "сүйлөмдү"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 189,
@@ -2076,7 +2076,7 @@ window.kyrgyzTests = {
           "мурдун балта кеспеген, ала көөдөн",
           "бүрсүгүнү, бүгүн"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 190,
@@ -2087,7 +2087,7 @@ window.kyrgyzTests = {
           "ка-м-чы-ла",
           "кам-чыл-а"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 191,
@@ -2098,7 +2098,7 @@ window.kyrgyzTests = {
           "сурама",
           "шилтеме"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 192,
@@ -2109,7 +2109,7 @@ window.kyrgyzTests = {
           "мак, сан, мун",
           "мен, сен, бул"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 193,
@@ -2120,7 +2120,7 @@ window.kyrgyzTests = {
           "бөлүкчө",
           "жандооч"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 194,
@@ -2131,7 +2131,7 @@ window.kyrgyzTests = {
           "сүйлөм мүчөсүнүн милдетин аткара албайт",
           "жогорудагылардын баары туура келет"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 195,
@@ -2142,7 +2142,7 @@ window.kyrgyzTests = {
           "айым",
           "бой жеткен"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 196,
@@ -2153,7 +2153,7 @@ window.kyrgyzTests = {
           "айым",
           "бой жеткен"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 197,
@@ -2164,7 +2164,7 @@ window.kyrgyzTests = {
           "сүйлөм мүчөсүнүн милдетин аткара албайт",
           "жогорудагылардын баары туура келет"
         ],
-        "correctIndex": null
+        "correctIndex": 3
       },
       {
         "number": 198,
@@ -2175,7 +2175,7 @@ window.kyrgyzTests = {
           "бөлүкчө",
           "жандооч"
         ],
-        "correctIndex": null
+        "correctIndex": 1
       },
       {
         "number": 199,
@@ -2186,7 +2186,7 @@ window.kyrgyzTests = {
           "мак, сан, мун",
           "мен, сен, бул"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       },
       {
         "number": 200,
@@ -2197,7 +2197,7 @@ window.kyrgyzTests = {
           "сурама",
           "шилтеме"
         ],
-        "correctIndex": null
+        "correctIndex": 0
       }
     ],
     "B2": [

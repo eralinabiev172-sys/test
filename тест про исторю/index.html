@@ -68,6 +68,11 @@
             <option value="180">Топ 180</option>
             <option value="200" selected>Топ 200</option>
           </select>
+          <label id="timeLimitLabel" class="limit-label" for="questionTimeLimit">Время на вопрос</label>
+          <select id="questionTimeLimit" class="limit-select">
+            <option value="20">20 секунд</option>
+            <option value="25" selected>25 секунд</option>
+          </select>
           <button id="randomToggleBtn" class="secondary-btn" type="button">Random: on</button>
           <label id="jumpLabel" class="limit-label" for="jumpToQuestion">Перейти к вопросу</label>
           <div class="jump-row">
@@ -112,6 +117,7 @@
           <div class="quiz-card__top">
             <span id="questionCounter" class="question-counter"></span>
             <span id="questionNumberBadge" class="question-badge"></span>
+            <span id="questionTimerBadge" class="question-badge question-badge--timer"></span>
           </div>
           <h2 id="questionTitle" class="question-title"></h2>
           <div id="optionsList" class="options-list"></div>

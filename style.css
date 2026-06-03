@@ -368,6 +368,7 @@ body {
 
 .quiz-card__top {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
@@ -392,6 +393,11 @@ body {
 .question-badge {
   background: rgba(91, 106, 47, 0.15);
   color: var(--olive);
+}
+
+.question-badge--warning {
+  background: rgba(177, 79, 43, 0.16);
+  color: var(--accent-dark);
 }
 
 .question-title {

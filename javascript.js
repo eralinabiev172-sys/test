@@ -27,6 +27,10 @@ const translations = {
     jumpButtonLabel: "Открыть",
     jumpPlaceholder: "№",
     jumpMissing: (number) => `Вопрос №${number} не вошел в текущий вариант.`,
+    timeLimitLabel: "Время на вопрос",
+    timeLeftLabel: "Осталось",
+    timeExpired: "Время вышло, переходим к следующему вопросу.",
+    timeValue: (seconds) => `${seconds} сек`,
     sessionNote: "Прогресс сохраняется на этом устройстве.",
     sessionRestored: "Прошлый прогресс восстановлен."
   },
@@ -55,6 +59,10 @@ const translations = {
     jumpButtonLabel: "Ачуу",
     jumpPlaceholder: "№",
     jumpMissing: (number) => `№${number} суроо ушул вариантка кирбей калды.`,
+    timeLimitLabel: "Суроого убакыт",
+    timeLeftLabel: "Калды",
+    timeExpired: "Убакыт бүттү, кийинки суроого өтөбүз.",
+    timeValue: (seconds) => `${seconds} сек`,
     sessionNote: "Прогресс ушул түзмөктө сакталат.",
     sessionRestored: "Мурунку прогресс калыбына келтирилди."
   }
@@ -66,6 +74,9 @@ const state = {
   currentIndex: 0,
   answers: {},
   limit: null,
+  timeLimit: 25,
+  timeLeft: 25,
+  timerId: null,
   randomMode: true,
   showingResults: false,
   sessionNoteKey: "sessionNote"
@@ -83,16 +94,19 @@ const ui = {
   resetBtn: document.getElementById("resetBtn"),
   newVariantBtn: document.getElementById("newVariantBtn"),
   questionLimit: document.getElementById("questionLimit"),
+  questionTimeLimit: document.getElementById("questionTimeLimit"),
   randomToggleBtn: document.getElementById("randomToggleBtn"),
   jumpInput: document.getElementById("jumpToQuestion"),
   jumpBtn: document.getElementById("jumpBtn"),
   jumpLabel: document.getElementById("jumpLabel"),
   sessionNote: document.getElementById("sessionNote"),
+  timeLimitLabel: document.getElementById("timeLimitLabel"),
   statusBanner: document.getElementById("statusBanner"),
   quizCard: document.getElementById("quizCard"),
   resultCard: document.getElementById("resultCard"),
   questionCounter: document.getElementById("questionCounter"),
   questionNumberBadge: document.getElementById("questionNumberBadge"),
+  questionTimerBadge: document.getElementById("questionTimerBadge"),
   questionTitle: document.getElementById("questionTitle"),
   optionsList: document.getElementById("optionsList"),
   progressText: document.getElementById("progressText"),
@@ -128,6 +142,85 @@ function renderSessionNote() {
   if (ui.sessionNote) {
     ui.sessionNote.textContent = t(state.sessionNoteKey);
   }
+}
+
+function getSelectedTimeLimit() {
+  if (!ui.questionTimeLimit) {
+    return 25;
+  }
+
+  const limit = Number(ui.questionTimeLimit.value);
+  if (!Number.isFinite(limit) || limit <= 0) {
+    return 25;
+  }
+
+  return limit;
+}
+
+function stopQuestionTimer() {
+  if (state.timerId) {
+    window.clearInterval(state.timerId);
+    state.timerId = null;
+  }
+}
+
+function updateTimerBadge() {
+  if (!ui.questionTimerBadge) {
+    return;
+  }
+
+  if (!state.started || state.showingResults || !questions.length) {
+    ui.questionTimerBadge.textContent = "";
+    ui.questionTimerBadge.classList.remove("question-badge--warning");
+    return;
+  }
+
+  ui.questionTimerBadge.textContent = `${t("timeLeftLabel")}: ${t("timeValue", state.timeLeft)}`;
+  ui.questionTimerBadge.classList.toggle("question-badge--warning", state.timeLeft <= 5);
+}
+
+function handleTimerExpired() {
+  if (!state.started || state.showingResults || !questions.length) {
+    return;
+  }
+
+  ui.statusBanner.textContent = t("timeExpired");
+  if (state.currentIndex >= questions.length - 1) {
+    showResults();
+    return;
+  }
+
+  state.currentIndex += 1;
+  renderQuestion();
+}
+
+function startQuestionTimer() {
+  stopQuestionTimer();
+  if (!state.started || state.showingResults || !questions.length) {
+    updateTimerBadge();
+    return;
+  }
+
+  state.timeLimit = getSelectedTimeLimit();
+  state.timeLeft = state.timeLimit;
+  updateTimerBadge();
+  state.timerId = window.setInterval(() => {
+    if (!state.started || state.showingResults) {
+      stopQuestionTimer();
+      return;
+    }
+
+    state.timeLeft -= 1;
+    if (state.timeLeft <= 0) {
+      state.timeLeft = 0;
+      updateTimerBadge();
+      stopQuestionTimer();
+      handleTimerExpired();
+      return;
+    }
+
+    updateTimerBadge();
+  }, 1000);
 }
 
 function clearSavedProgress() {
@@ -308,6 +401,10 @@ function updateLanguageButtons() {
   if (ui.jumpInput) {
     ui.jumpInput.placeholder = t("jumpPlaceholder");
   }
+  if (ui.timeLimitLabel) {
+    ui.timeLimitLabel.textContent = t("timeLimitLabel");
+  }
+  updateTimerBadge();
   renderSessionNote();
 }
 
@@ -364,6 +461,9 @@ function updateControls() {
   ui.resetBtn.disabled = !state.started && getAnsweredCount() === 0;
   if (ui.questionLimit) {
     ui.questionLimit.disabled = state.started;
+  }
+  if (ui.questionTimeLimit) {
+    ui.questionTimeLimit.disabled = state.started;
   }
   if (ui.newVariantBtn) {
     ui.newVariantBtn.disabled = sourceQuestions.length === 0;
@@ -510,6 +610,7 @@ function renderQuestion() {
 
   ui.statusBanner.textContent = t("statusQuestion");
   updateProgress();
+  startQuestionTimer();
   saveProgress();
 }
 
@@ -520,6 +621,7 @@ function startQuiz() {
   state.answers = {};
   state.showingResults = false;
   state.sessionNoteKey = "sessionNote";
+  stopQuestionTimer();
   renderSessionNote();
   renderQuestion();
 }
@@ -545,6 +647,7 @@ function goToNextQuestion() {
 }
 
 function showResults() {
+  stopQuestionTimer();
   ui.quizCard.classList.add("hidden");
   ui.resultCard.classList.remove("hidden");
   state.showingResults = true;
@@ -596,6 +699,7 @@ function showResults() {
 }
 
 function resetQuiz() {
+  stopQuestionTimer();
   prepareVariant();
   state.started = false;
   state.currentIndex = 0;
@@ -697,6 +801,15 @@ if (ui.randomToggleBtn) {
 
 if (ui.questionLimit) {
   ui.questionLimit.addEventListener("change", () => {
+    if (!state.started) {
+      resetQuiz();
+    }
+  });
+}
+
+
+if (ui.questionTimeLimit) {
+  ui.questionTimeLimit.addEventListener("change", () => {
     if (!state.started) {
       resetQuiz();
     }

@@ -26,8 +26,8 @@
             <span class="hero-stat__label">вопросов</span>
           </div>
           <div class="hero-stat">
-            <span class="hero-stat__value">2</span>
-            <span class="hero-stat__label">языка</span>
+            <span class="hero-stat__value">3</span>
+            <span class="hero-stat__label">раздела</span>
           </div>
           <div class="hero-stat">
             <span class="hero-stat__value">1</span>
@@ -62,9 +62,9 @@
           <span>Тренировка по истории Кыргызстана в экзаменационном формате.</span>
         </a>
         <a class="study-card" href="./kyrgyz/index.html">
-          <span class="study-card__tag">Кыргыз тили / адабияты</span>
-          <strong>B1 и B2</strong>
-          <span>Отдельные предметы и уровни в одном удобном разделе.</span>
+          <span class="study-card__tag">Кыргыз тили</span>
+          <strong>B1</strong>
+          <span>Отдельный тест по кыргызскому языку с 200 вопросами.</span>
         </a>
       </div>
     </section>
@@ -93,6 +93,11 @@
             <option value="100">Топ 100</option>
             <option value="150">Топ 150</option>
             <option value="180" selected>Топ 180</option>
+          </select>
+          <label id="timeLimitLabel" class="limit-label" for="questionTimeLimit">Время на вопрос</label>
+          <select id="questionTimeLimit" class="limit-select">
+            <option value="20">20 секунд</option>
+            <option value="25" selected>25 секунд</option>
           </select>
           <button id="randomToggleBtn" class="secondary-btn" type="button">Random: on</button>
           <label id="jumpLabel" class="limit-label" for="jumpToQuestion">Перейти к вопросу</label>
@@ -138,6 +143,7 @@
           <div class="quiz-card__top">
             <span id="questionCounter" class="question-counter"></span>
             <span id="questionNumberBadge" class="question-badge"></span>
+            <span id="questionTimerBadge" class="question-badge question-badge--timer"></span>
           </div>
           <h2 id="questionTitle" class="question-title"></h2>
           <div id="optionsList" class="options-list"></div>
