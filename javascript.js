@@ -336,12 +336,25 @@ function getQuestionOptions(question) {
   return state.lang === "ru" ? question.optionsRu : question.optionsKg;
 }
 
+function getCorrectIndex(question) {
+  if (state.lang === "ru" && Number.isInteger(question.correctIndexRu)) {
+    return question.correctIndexRu;
+  }
+
+  if (state.lang === "kg" && Number.isInteger(question.correctIndexKg)) {
+    return question.correctIndexKg;
+  }
+
+  return question.correctIndex;
+}
+
 function getAnsweredCount() {
   return Object.keys(state.answers).length;
 }
 
 function hasAnswerKey(question) {
-  return Number.isInteger(question.correctIndex) && question.correctIndex >= 0;
+  const correctIndex = getCorrectIndex(question);
+  return Number.isInteger(correctIndex) && correctIndex >= 0;
 }
 
 function countResults() {
@@ -357,12 +370,13 @@ function countResults() {
     }
 
     const answerIndex = state.answers[String(question.number)];
+    const correctIndex = getCorrectIndex(question);
     if (answerIndex === undefined) {
       unanswered += 1;
       return;
     }
 
-    if (answerIndex === question.correctIndex) {
+    if (answerIndex === correctIndex) {
       correct += 1;
     } else {
       wrong += 1;
@@ -657,7 +671,7 @@ function showResults() {
   questions.forEach((question) => {
     const options = getQuestionOptions(question);
     const answerIndex = state.answers[String(question.number)];
-    const correctIndex = question.correctIndex;
+    const correctIndex = getCorrectIndex(question);
     const isAnswered = answerIndex !== undefined;
     const isCorrect = isAnswered && hasAnswerKey(question) && answerIndex === correctIndex;
     const answerText = answerIndex === undefined
