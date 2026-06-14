@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Кыргыз тили — B1</title>
-  <link rel="stylesheet" href="../style.css">
+  <title>Кыргыз адабияты — B1</title>
+  <link rel="stylesheet" href="../../style.css">
 </head>
-<body data-quiz-kind="language">
+<body data-quiz-kind="literature">
   <div class="page-shell">
     <nav class="site-nav" aria-label="Сайттын бөлүмдөрү">
-      <a class="site-nav__link" href="../index.html">География</a>
-      <a class="site-nav__link" href="../тест про исторю/index.html">Тарых</a>
-      <a class="site-nav__link site-nav__link--active" href="./index.html">Кыргыз тили</a>
-      <a class="site-nav__link" href="./literature/index.html">Кыргыз адабияты</a>
+      <a class="site-nav__link" href="../../index.html">География</a>
+      <a class="site-nav__link" href="../../тест про исторю/index.html">Тарых</a>
+      <a class="site-nav__link" href="../index.html">Кыргыз тили</a>
+      <a class="site-nav__link site-nav__link--active" href="./index.html">Кыргыз адабияты</a>
     </nav>
 
     <header class="hero">
       <div class="hero__content">
         <p class="eyebrow">Интерактивдүү тест</p>
-        <h1 id="quizHeading">Кыргыз тили — B1</h1>
+        <h1 id="quizHeading">Кыргыз адабияты — B1</h1>
         <p class="hero__text">
-          200 суроодон турган B1 тест. Башта, жооп танда, соңунда жыйынтыкты дароо текшер.
+          Бул бөлүм өзүнчө даярдалды. Суроолорду жана жоопторду кийин кошобуз.
         </p>
         <div class="hero__stats">
           <div class="hero-stat">
-            <span id="heroQuestionCount" class="hero-stat__value">200</span>
+            <span id="heroQuestionCount" class="hero-stat__value">0</span>
             <span class="hero-stat__label">суроолор</span>
           </div>
           <div class="hero-stat">
@@ -50,19 +50,19 @@
       <aside class="sidebar">
         <div class="panel control-panel">
           <h2>Жүрүш</h2>
-          <p id="progressText">0 / 200 жооп берилди</p>
+          <p id="progressText">0 / 0 жооп берилди</p>
           <div class="progress">
             <div id="progressBar" class="progress__bar"></div>
           </div>
           <div class="progress-meta">
             <span id="answeredCount" class="meta-pill">0 жооп берилди</span>
-            <span id="remainingCount" class="meta-pill">200 калды</span>
+            <span id="remainingCount" class="meta-pill">0 калды</span>
           </div>
         </div>
 
         <div class="panel">
           <h2>Кеңеш</h2>
-          <p class="small-text">Адегенде тез вариант менен өтүп, кийин жаңылгандарды кайра кара.</p>
+          <p class="small-text">Бул бөлүмдү азырынча даярдап койдум. Суроолорду жиберсең, толтуруп берем.</p>
         </div>
 
         <div class="panel">
@@ -72,9 +72,9 @@
             <option value="20">Топ 20</option>
             <option value="30">Топ 30</option>
             <option value="80">Топ 80</option>
-            <option value="100">Топ 100</option>
+            <option value="100" selected>Топ 100</option>
             <option value="150">Топ 150</option>
-            <option value="200" selected>Топ 200</option>
+            <option value="200">Топ 200</option>
           </select>
           <label id="timeLimitLabel" class="limit-label" for="questionTimeLimit">Суроого убакыт</label>
           <select id="questionTimeLimit" class="limit-select">
@@ -95,14 +95,14 @@
 
         <div class="panel">
           <h2 id="questionMapTitle">Суроолор картасы</h2>
-          <p id="questionMapHint" class="small-text">Тез өтүү үчүн номерди бас</p>
+          <p id="questionMapHint" class="small-text">Жакында суроолор кошулат</p>
           <div id="questionMap" class="question-map"></div>
         </div>
       </aside>
 
       <section class="content">
         <div id="statusBanner" class="status-banner">
-          «Тестти баштоо» баскычын басып, суроолорду жүктө.
+          Кыргыз адабияты боюнча суроолорду кийин кошобуз.
         </div>
 
         <div id="quizCard" class="quiz-card hidden">
@@ -129,8 +129,8 @@
                 <tr>
                   <th>№</th>
                   <th>Суроо</th>
-                  <th>Сенин жооп</th>
-                  <th>Туура жооп</th>
+                  <th>Сенин жообуң</th>
+                  <th>Туура жообу</th>
                 </tr>
               </thead>
               <tbody id="resultBody"></tbody>
@@ -143,6 +143,6 @@
 
   <script src="./questions.js"></script>
   <script src="./b2.questions.js"></script>
-  <script src="./app.js"></script>
+  <script src="../app.js"></script>
 </body>
 </html>
