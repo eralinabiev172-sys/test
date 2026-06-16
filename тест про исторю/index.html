@@ -1,28 +1,27 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Тест по Истории Кыргызстана</title>
+  <title>Тест по истории Кыргызстана 2025</title>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <div class="page-shell">
     <nav class="site-nav" aria-label="Разделы сайта">
       <a class="site-nav__link" href="../index.html">География</a>
-      <a class="site-nav__link site-nav__link--active" href="./index.html">История</a>
+      <a class="site-nav__link site-nav__link--active" href="../index2.html">История</a>
       <a class="site-nav__link" href="../kyrgyz/index.html">Кыргыз тили</a>
+      <a class="site-nav__link" href="../kyrgyz/literature/index.html">Кыргыз адабияты</a>
     </nav>
     <header class="hero">
       <div class="hero__content">
         <p class="eyebrow">Интерактивный тест</p>
-        <h1>Тест по Истории Кыргызстана</h1>
-        <p class="hero__text">
-          Проходи все 196 вопросов, переключай язык, запускай новый перемешанный вариант и сразу смотри итог по правильным и неправильным ответам.
-        </p>
+        <h1>Тест по Истории Кыргызстана 2025</h1>
+        <p class="hero__text">Отдельный вариант 2025: проходи вопросы, переключай язык и сразу смотри итог по правильным и неправильным ответам.</p>
         <div class="hero__stats">
           <div class="hero-stat">
-            <span class="hero-stat__value">196</span>
+            <span class="hero-stat__value">200</span>
             <span class="hero-stat__label">вопросов</span>
           </div>
           <div class="hero-stat">
@@ -66,7 +65,7 @@
             <option value="100">Топ 100</option>
             <option value="150">Топ 150</option>
             <option value="180">Топ 180</option>
-            <option value="196" selected>Топ 196</option>
+            <option value="200" selected>Топ 200</option>
           </select>
           <label id="timeLimitLabel" class="limit-label" for="questionTimeLimit">Время на вопрос</label>
           <select id="questionTimeLimit" class="limit-select">
@@ -81,6 +80,7 @@
           </div>
           <p id="sessionNote" class="small-text session-note">Прогресс сохраняется на этом устройстве.</p>
           <button id="finishBtn" class="primary-btn" type="button">Завершить</button>
+          <button id="pauseBtn" class="secondary-btn" type="button">Пауза</button>
           <button id="newVariantBtn" class="secondary-btn" type="button">Новый вариант</button>
           <button id="resetBtn" class="ghost-btn" type="button">Сбросить</button>
         </div>
@@ -153,3 +153,6 @@
   <script src="../javascript.js"></script>
 </body>
 </html>
+
+
+

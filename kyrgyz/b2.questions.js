@@ -1,4 +1,4 @@
-window.kyrgyzTests = window.kyrgyzTests || {};
+﻿window.kyrgyzTests = window.kyrgyzTests || {};
 window.kyrgyzTests.language = window.kyrgyzTests.language || {};
 window.kyrgyzTests.language.B2 = [
   {
@@ -2202,3 +2202,4 @@ window.kyrgyzTests.language.B2 = [
     "correctIndex": 1
   }
 ];
+

@@ -1,4 +1,4 @@
-window.kyrgyzTests = window.kyrgyzTests || {};
+﻿window.kyrgyzTests = window.kyrgyzTests || {};
 window.kyrgyzTests.literature = window.kyrgyzTests.literature || {};
 window.kyrgyzTests.literature.B2 = [
   {
@@ -1102,3 +1102,4 @@ window.kyrgyzTests.literature.B2 = [
     "correctIndex": 1
   }
 ];
+

@@ -3,32 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Тест по Кыргызской Республике</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Тест по истории Кыргызстана 2023-2024</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <div class="page-shell">
     <nav class="site-nav" aria-label="Разделы сайта">
-      <a class="site-nav__link site-nav__link--active" href="./index.html">География</a>
-      <a class="site-nav__link" href="./index2.html">История</a>
-      <a class="site-nav__link" href="./kyrgyz/index.html">Кыргыз тили</a>
-      <a class="site-nav__link" href="./kyrgyz/literature/index.html">Кыргыз адабияты</a>
+      <a class="site-nav__link" href="../index.html">География</a>
+      <a class="site-nav__link site-nav__link--active" href="../index2.html">История</a>
+      <a class="site-nav__link" href="../kyrgyz/index.html">Кыргыз тили</a>
+      <a class="site-nav__link" href="../kyrgyz/literature/index.html">Кыргыз адабияты</a>
     </nav>
     <header class="hero">
       <div class="hero__content">
         <p class="eyebrow">Интерактивный тест</p>
-        <h1>Тест по Кыргызской Республике</h1>
-        <p class="hero__text">
-          Выбирай язык, проходи полный набор вопросов и сразу получай разбор с правильными ответами.
-        </p>
+        <h1>Тест по Истории Кыргызстана 2023-2024</h1>
+        <p class="hero__text">Отдельный вариант 2023-2024, чтобы не смешивать его с тестом 2025. Выбирай язык, запускай перемешанный набор и сразу смотри результат после ответа.</p>
         <div class="hero__stats">
           <div class="hero-stat">
-            <span class="hero-stat__value">180</span>
+            <span class="hero-stat__value">200</span>
             <span class="hero-stat__label">вопросов</span>
           </div>
           <div class="hero-stat">
-            <span class="hero-stat__value">3</span>
-            <span class="hero-stat__label">раздела</span>
+            <span class="hero-stat__value">2</span>
+            <span class="hero-stat__label">языка</span>
           </div>
           <div class="hero-stat">
             <span class="hero-stat__value">1</span>
@@ -42,33 +40,6 @@
         </div>
       </div>
     </header>
-
-    <section class="study-hub">
-      <div class="study-hub__header">
-        <p class="eyebrow">Подготовка к госэкзаменам</p>
-        <h2>Открой нужный предмет и тренируйся без лишней путаницы</h2>
-        <p class="study-hub__text">
-          Сайт помогает готовиться по шагам: выбрать предмет, пройти вариант, увидеть ошибки и вернуться к слабым темам.
-        </p>
-      </div>
-      <div class="study-grid">
-        <a class="study-card study-card--active" href="./index.html">
-          <span class="study-card__tag">География</span>
-          <strong>180 вопросов</strong>
-          <span>Тест по основным темам и быстрый разбор результатов.</span>
-        </a>
-        <a class="study-card" href="./index2.html">
-          <span class="study-card__tag">История</span>
-          <strong>2 варианта</strong>
-          <span>Отдельный хаб для 2025 и 2023-2024, чтобы не смешивать тесты.</span>
-        </a>
-        <a class="study-card" href="./kyrgyz/index.html">
-          <span class="study-card__tag">Кыргыз тили</span>
-          <strong>B1</strong>
-          <span>Отдельный тест по кыргызскому языку с 200 вопросами.</span>
-        </a>
-      </div>
-    </section>
 
     <main class="layout">
       <aside class="sidebar">
@@ -93,7 +64,8 @@
             <option value="80">Топ 80</option>
             <option value="100">Топ 100</option>
             <option value="150">Топ 150</option>
-            <option value="180" selected>Топ 180</option>
+            <option value="180">Топ 180</option>
+            <option value="200" selected>Топ 200</option>
           </select>
           <label id="timeLimitLabel" class="limit-label" for="questionTimeLimit">Время на вопрос</label>
           <select id="questionTimeLimit" class="limit-select">
@@ -113,6 +85,15 @@
           <button id="resetBtn" class="ghost-btn" type="button">Сбросить</button>
         </div>
 
+        <div class="panel prep-panel">
+          <h2>Как готовиться</h2>
+          <ol class="prep-list">
+            <li>Сначала пройди короткий вариант, чтобы проверить базу.</li>
+            <li>Потом запускай полный набор и разбирай ошибки сразу после ответа.</li>
+            <li>Перед экзаменом включай случайный порядок, чтобы не запоминать номера.</li>
+          </ol>
+        </div>
+
         <div class="panel">
           <h2 id="questionMapTitle">Карта вопросов</h2>
           <p id="questionMapHint" class="small-text">Нажми на номер, чтобы быстро перейти</p>
@@ -122,17 +103,8 @@
         <div class="panel">
           <h2>Подсказка</h2>
           <p class="small-text">
-            Сайт запоминает выбранные варианты, показывает прогресс по всем 180 вопросам и в конце сразу считает результат.
+            Каждый новый запуск собирает заново перемешанный вариант теста и начинает с первого вопроса.
           </p>
-        </div>
-
-        <div class="panel prep-panel">
-          <h2>Как готовиться</h2>
-          <ol class="prep-list">
-            <li>Начинай с 20–40 вопросов, чтобы спокойно войти в тему.</li>
-            <li>После результата смотри ошибки и возвращайся к ним ещё раз.</li>
-            <li>Перед экзаменом проходи полный вариант в случайном порядке.</li>
-          </ol>
         </div>
       </aside>
 
@@ -177,9 +149,10 @@
     </main>
   </div>
 
-  <script src="questions.js"></script>
-  <script src="javascript.js"></script>
+  <script src="./questions.js"></script>
+  <script src="../javascript.js"></script>
 </body>
 </html>
+
 
 

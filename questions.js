@@ -1,4 +1,4 @@
-window.questionsData = [
+﻿window.questionsData = [
     {
         "number": 1,
         "kg": "КРнын аймагы кайсы тоо системасына кирет?",
@@ -3246,3 +3246,4 @@ window.questionsData = [
         "correctIndex": 0
     }
 ];
+

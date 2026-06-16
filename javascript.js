@@ -1,4 +1,4 @@
-const sourceQuestions = Array.isArray(window.questionsData) ? window.questionsData : [];
+﻿const sourceQuestions = Array.isArray(window.questionsData) ? window.questionsData : [];
 let questions = [];
 
 const translations = {
@@ -23,13 +23,16 @@ const translations = {
     finishLabel: "Завершить",
     resetLabel: "Сбросить",
     newVariantLabel: "Новый вариант",
+    pauseLabel: "Пауза",
+    resumeLabel: "Продолжить",
     jumpLabel: "Перейти к вопросу",
     jumpButtonLabel: "Открыть",
     jumpPlaceholder: "№",
     jumpMissing: (number) => `Вопрос №${number} не вошел в текущий вариант.`,
     timeLimitLabel: "Время на вопрос",
     timeLeftLabel: "Осталось",
-    timeExpired: "Время вышло, переходим к следующему вопросу.",
+    timePaused: "Пауза",
+    timeExpired: "Время вышло, тест завершён.",
     timeValue: (seconds) => `${seconds} сек`,
     sessionNote: "Прогресс сохраняется на этом устройстве.",
     sessionRestored: "Прошлый прогресс восстановлен."
@@ -55,12 +58,15 @@ const translations = {
     finishLabel: "Аяктоо",
     resetLabel: "Тазалоо",
     newVariantLabel: "Жаңы вариант",
+    pauseLabel: "Токтотуу",
+    resumeLabel: "Улантуу",
     jumpLabel: "Суроого өтүү",
     jumpButtonLabel: "Ачуу",
     jumpPlaceholder: "№",
     jumpMissing: (number) => `№${number} суроо ушул вариантка кирбей калды.`,
     timeLimitLabel: "Суроого убакыт",
     timeLeftLabel: "Калды",
+    timePaused: "Токтотулду",
     timeExpired: "Убакыт бүттү, кийинки суроого өтөбүз.",
     timeValue: (seconds) => `${seconds} сек`,
     sessionNote: "Прогресс ушул түзмөктө сакталат.",
@@ -77,6 +83,8 @@ const state = {
   timeLimit: 25,
   timeLeft: 25,
   timerId: null,
+  timerPaused: false,
+  restoreTimer: false,
   randomMode: true,
   showingResults: false,
   sessionNoteKey: "sessionNote"
@@ -91,6 +99,7 @@ const ui = {
   inlinePrevBtn: document.getElementById("inlinePrevBtn"),
   inlineNextBtn: document.getElementById("inlineNextBtn"),
   finishBtn: document.getElementById("finishBtn"),
+  pauseBtn: document.getElementById("pauseBtn"),
   resetBtn: document.getElementById("resetBtn"),
   newVariantBtn: document.getElementById("newVariantBtn"),
   questionLimit: document.getElementById("questionLimit"),
@@ -164,6 +173,23 @@ function stopQuestionTimer() {
   }
 }
 
+function updatePauseButton() {
+  if (!ui.pauseBtn) {
+    return;
+  }
+
+  if (!state.started || state.showingResults || !questions.length) {
+    ui.pauseBtn.disabled = true;
+    ui.pauseBtn.textContent = t("pauseLabel");
+    ui.pauseBtn.classList.remove("secondary-btn--active");
+    return;
+  }
+
+  ui.pauseBtn.disabled = false;
+  ui.pauseBtn.textContent = state.timerPaused ? t("resumeLabel") : t("pauseLabel");
+  ui.pauseBtn.classList.toggle("secondary-btn--active", state.timerPaused);
+}
+
 function updateTimerBadge() {
   if (!ui.questionTimerBadge) {
     return;
@@ -171,6 +197,12 @@ function updateTimerBadge() {
 
   if (!state.started || state.showingResults || !questions.length) {
     ui.questionTimerBadge.textContent = "";
+    ui.questionTimerBadge.classList.remove("question-badge--warning");
+    return;
+  }
+
+  if (state.timerPaused) {
+    ui.questionTimerBadge.textContent = `${t("timePaused")}: ${t("timeValue", state.timeLeft)}`;
     ui.questionTimerBadge.classList.remove("question-badge--warning");
     return;
   }
@@ -185,32 +217,40 @@ function handleTimerExpired() {
   }
 
   ui.statusBanner.textContent = t("timeExpired");
-  if (state.currentIndex >= questions.length - 1) {
-    showResults();
-    return;
-  }
-
-  state.currentIndex += 1;
-  renderQuestion();
+  showResults();
 }
 
-function startQuestionTimer() {
+function startQuestionTimer(resetTime = true) {
   stopQuestionTimer();
   if (!state.started || state.showingResults || !questions.length) {
     updateTimerBadge();
+    updatePauseButton();
     return;
   }
 
   state.timeLimit = getSelectedTimeLimit();
-  state.timeLeft = state.timeLimit;
+  if (resetTime || !Number.isFinite(state.timeLeft) || state.timeLeft <= 0 || state.timeLeft > state.timeLimit) {
+    state.timeLeft = state.timeLimit;
+  }
   updateTimerBadge();
+  updatePauseButton();
+  if (state.timerPaused) {
+    return;
+  }
+
   state.timerId = window.setInterval(() => {
     if (!state.started || state.showingResults) {
       stopQuestionTimer();
       return;
     }
 
+    if (state.timerPaused) {
+      stopQuestionTimer();
+      return;
+    }
+
     state.timeLeft -= 1;
+    saveProgress();
     if (state.timeLeft <= 0) {
       state.timeLeft = 0;
       updateTimerBadge();
@@ -245,6 +285,8 @@ function saveProgress() {
       currentIndex: state.currentIndex,
       answers: state.answers,
       limit: state.limit,
+      timeLeft: state.timeLeft,
+      timerPaused: state.timerPaused,
       randomMode: state.randomMode,
       showingResults: state.showingResults,
       questions,
@@ -276,11 +318,16 @@ function restoreProgress() {
     state.started = Boolean(saved.started);
     state.answers = saved.answers && typeof saved.answers === "object" ? saved.answers : {};
     state.limit = Number.isFinite(saved.limit) ? saved.limit : saved.questions.length;
+    state.timeLeft = Number.isFinite(saved.timeLeft) && saved.timeLeft > 0
+      ? saved.timeLeft
+      : getSelectedTimeLimit();
+    state.timerPaused = Boolean(saved.timerPaused);
     state.randomMode = saved.randomMode !== false;
     state.currentIndex = Number.isInteger(saved.currentIndex)
       ? Math.min(Math.max(saved.currentIndex, 0), saved.questions.length - 1)
       : 0;
     state.showingResults = Boolean(saved.showingResults);
+    state.restoreTimer = !state.showingResults && Boolean(saved.started);
     state.sessionNoteKey = "sessionRestored";
     if (ui.questionLimit) {
       ui.questionLimit.value = String(state.limit);
@@ -399,6 +446,9 @@ function updateLanguageButtons() {
     ui.inlineNextBtn.textContent = state.lang === "kg" ? "Кийинки" : "Далее";
   }
   ui.finishBtn.textContent = t("finishLabel");
+  if (ui.pauseBtn) {
+    ui.pauseBtn.textContent = state.timerPaused ? t("resumeLabel") : t("pauseLabel");
+  }
   ui.resetBtn.textContent = t("resetLabel");
   if (ui.newVariantBtn) {
     ui.newVariantBtn.textContent = t("newVariantLabel");
@@ -419,6 +469,7 @@ function updateLanguageButtons() {
     ui.timeLimitLabel.textContent = t("timeLimitLabel");
   }
   updateTimerBadge();
+  updatePauseButton();
   renderSessionNote();
 }
 
@@ -472,6 +523,9 @@ function updateControls() {
     ui.inlineNextBtn.disabled = nextDisabled;
   }
   ui.finishBtn.disabled = !state.started;
+  if (ui.pauseBtn) {
+    ui.pauseBtn.disabled = !state.started || state.showingResults || !questions.length;
+  }
   ui.resetBtn.disabled = !state.started && getAnsweredCount() === 0;
   if (ui.questionLimit) {
     ui.questionLimit.disabled = state.started;
@@ -585,6 +639,8 @@ function renderQuestion() {
   const question = questions[state.currentIndex];
   const options = getQuestionOptions(question);
   const key = String(question.number);
+  const resetTimer = !state.restoreTimer;
+  state.restoreTimer = false;
 
   ui.quizCard.classList.remove("hidden");
   ui.resultCard.classList.add("hidden");
@@ -624,7 +680,7 @@ function renderQuestion() {
 
   ui.statusBanner.textContent = t("statusQuestion");
   updateProgress();
-  startQuestionTimer();
+  startQuestionTimer(resetTimer);
   saveProgress();
 }
 
@@ -633,9 +689,13 @@ function startQuiz() {
   state.started = true;
   state.currentIndex = 0;
   state.answers = {};
+  state.timeLeft = getSelectedTimeLimit();
+  state.timerPaused = false;
+  state.restoreTimer = false;
   state.showingResults = false;
   state.sessionNoteKey = "sessionNote";
   stopQuestionTimer();
+  updatePauseButton();
   renderSessionNote();
   renderQuestion();
 }
@@ -662,6 +722,7 @@ function goToNextQuestion() {
 
 function showResults() {
   stopQuestionTimer();
+  state.timerPaused = false;
   ui.quizCard.classList.add("hidden");
   ui.resultCard.classList.remove("hidden");
   state.showingResults = true;
@@ -708,6 +769,7 @@ function showResults() {
   ui.resultSummary.textContent = t("resultSummary", answered, questions.length, gradable, correct, wrong, unanswered, ungraded);
   ui.statusBanner.textContent = t("statusResult");
   updateProgress();
+  updatePauseButton();
   saveProgress();
   scrollIntoViewIfNeeded();
 }
@@ -718,6 +780,9 @@ function resetQuiz() {
   state.started = false;
   state.currentIndex = 0;
   state.answers = {};
+  state.timeLeft = getSelectedTimeLimit();
+  state.timerPaused = false;
+  state.restoreTimer = false;
   state.showingResults = false;
   state.sessionNoteKey = "sessionNote";
   renderSessionNote();
@@ -725,7 +790,24 @@ function resetQuiz() {
   ui.resultCard.classList.add("hidden");
   ui.statusBanner.textContent = t("statusIdle");
   updateProgress();
+  updatePauseButton();
   clearSavedProgress();
+}
+
+function togglePauseTimer() {
+  if (!state.started || state.showingResults || !questions.length) {
+    return;
+  }
+
+  state.timerPaused = !state.timerPaused;
+  stopQuestionTimer();
+  updateTimerBadge();
+  updatePauseButton();
+  saveProgress();
+
+  if (!state.timerPaused) {
+    startQuestionTimer(false);
+  }
 }
 
 ui.langRu.addEventListener("click", () => {
@@ -778,6 +860,10 @@ ui.finishBtn.addEventListener("click", () => {
   }
   showResults();
 });
+
+if (ui.pauseBtn) {
+  ui.pauseBtn.addEventListener("click", togglePauseTimer);
+}
 
 ui.resetBtn.addEventListener("click", resetQuiz);
 
@@ -877,3 +963,4 @@ if (restoreProgress()) {
 } else {
   resetQuiz();
 }
+

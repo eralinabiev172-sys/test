@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --bg: #f4efe6;
   --paper: #fffaf1;
   --card: #ffffff;
@@ -574,6 +574,12 @@ button:disabled {
   color: var(--ink);
 }
 
+.secondary-btn--active {
+  background: rgba(177, 79, 43, 0.18);
+  color: var(--accent-dark);
+  border-color: rgba(177, 79, 43, 0.28);
+}
+
 .ghost-btn {
   background: transparent;
   border: 1px dashed var(--line);
@@ -907,3 +913,4 @@ th {
     content: "Правильный вариант";
   }
 }
+

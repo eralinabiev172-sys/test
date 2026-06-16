@@ -1,4 +1,4 @@
-window.questionsData = [
+﻿window.questionsData = [
   {
     "number": 1,
     "kg": "Кыргызстандын аймагында жашаган эң байыркы адамдын түрүн атагыла?",
@@ -3918,3 +3918,4 @@ window.questionsData = [
     "correctIndex": 0
   }
 ];
+

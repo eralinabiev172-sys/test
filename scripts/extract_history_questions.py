@@ -1,5 +1,6 @@
-import json
+﻿import json
 import re
+import sys
 import zipfile
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -165,8 +166,8 @@ def build_questions(paragraphs):
 
 def main():
     project_root = Path(__file__).resolve().parent.parent
-    source_path = project_root / "history_source.docx"
-    output_path = project_root / "тест про исторю" / "questions.js"
+    source_path = Path(sys.argv[1]) if len(sys.argv) > 1 else project_root / "history_source.docx"
+    output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else project_root / "тест про исторю" / "questions.js"
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     paragraphs = load_paragraphs(source_path)
@@ -192,3 +193,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+

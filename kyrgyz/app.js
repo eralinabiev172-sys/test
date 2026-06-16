@@ -1,4 +1,4 @@
-const quizKind = document.body?.dataset?.quizKind || "language";
+﻿const quizKind = document.body?.dataset?.quizKind || "language";
 const levelStorageKey = `kyrgyz-${quizKind}-level`;
 
 const quizTitles = {
@@ -20,6 +20,8 @@ const state = {
   timeLimit: 25,
   timeLeft: 25,
   timerId: null,
+  timerPaused: false,
+  restoreTimer: false,
   sessionNoteKey: "sessionNote"
 };
 
@@ -29,6 +31,7 @@ const ui = {
   randomToggleBtn: document.getElementById("randomToggleBtn"),
   startBtn: document.getElementById("startBtn"),
   finishBtn: document.getElementById("finishBtn"),
+  pauseBtn: document.getElementById("pauseBtn"),
   resetBtn: document.getElementById("resetBtn"),
   newVariantBtn: document.getElementById("newVariantBtn"),
   questionLimit: document.getElementById("questionLimit"),
@@ -72,7 +75,10 @@ const text = {
   resultTitle: "Сенин жоопторуң",
   sessionNote: "Прогресс ушул түзмөктө сакталат.",
   sessionRestored: "Мурунку прогресс калыбына келтирилди.",
-  timeExpired: "Убакыт бүттү, кийинки суроого өтөбүз."
+  timeExpired: "Убакыт бүттү, тестти жыйынтыктайбыз.",
+  pauseLabel: "Токтотуу",
+  resumeLabel: "Улантуу",
+  timePaused: "Токтотулду"
 };
 
 function getAvailableLevels() {
@@ -208,6 +214,23 @@ function stopQuestionTimer() {
   }
 }
 
+function updatePauseButton() {
+  if (!ui.pauseBtn) {
+    return;
+  }
+
+  if (!state.started || state.showingResults || !state.questions.length) {
+    ui.pauseBtn.disabled = true;
+    ui.pauseBtn.textContent = text.pauseLabel;
+    ui.pauseBtn.classList.remove("secondary-btn--active");
+    return;
+  }
+
+  ui.pauseBtn.disabled = false;
+  ui.pauseBtn.textContent = state.timerPaused ? text.resumeLabel : text.pauseLabel;
+  ui.pauseBtn.classList.toggle("secondary-btn--active", state.timerPaused);
+}
+
 function updateTimerBadge() {
   if (!ui.questionTimerBadge) {
     return;
@@ -215,6 +238,12 @@ function updateTimerBadge() {
 
   if (!state.started || state.showingResults || !state.questions.length) {
     ui.questionTimerBadge.textContent = "";
+    ui.questionTimerBadge.classList.remove("question-badge--warning");
+    return;
+  }
+
+  if (state.timerPaused) {
+    ui.questionTimerBadge.textContent = `Токтотулду: ${state.timeLeft} сек`;
     ui.questionTimerBadge.classList.remove("question-badge--warning");
     return;
   }
@@ -229,32 +258,40 @@ function handleTimerExpired() {
   }
 
   setBanner(text.timeExpired);
-  if (state.currentIndex >= state.questions.length - 1) {
-    showResults();
-    return;
-  }
-
-  state.currentIndex += 1;
-  renderQuestion();
+  showResults();
 }
 
-function startQuestionTimer() {
+function startQuestionTimer(resetTime = true) {
   stopQuestionTimer();
   if (!state.started || state.showingResults || !state.questions.length) {
     updateTimerBadge();
+    updatePauseButton();
     return;
   }
 
   state.timeLimit = getSelectedTimeLimit();
-  state.timeLeft = state.timeLimit;
+  if (resetTime || !Number.isFinite(state.timeLeft) || state.timeLeft <= 0 || state.timeLeft > state.timeLimit) {
+    state.timeLeft = state.timeLimit;
+  }
   updateTimerBadge();
+  updatePauseButton();
+  if (state.timerPaused) {
+    return;
+  }
+
   state.timerId = window.setInterval(() => {
     if (!state.started || state.showingResults) {
       stopQuestionTimer();
       return;
     }
 
+    if (state.timerPaused) {
+      stopQuestionTimer();
+      return;
+    }
+
     state.timeLeft -= 1;
+    saveProgress();
     if (state.timeLeft <= 0) {
       state.timeLeft = 0;
       updateTimerBadge();
@@ -290,6 +327,8 @@ function saveProgress() {
       currentIndex: state.currentIndex,
       answers: state.answers,
       limit: state.limit,
+      timeLeft: state.timeLeft,
+      timerPaused: state.timerPaused,
       randomMode: state.randomMode,
       showingResults: state.showingResults,
       questions: state.questions,
@@ -321,11 +360,16 @@ function restoreProgress() {
     state.started = Boolean(saved.started);
     state.answers = saved.answers && typeof saved.answers === "object" ? saved.answers : {};
     state.limit = Number.isFinite(saved.limit) ? saved.limit : saved.questions.length;
+    state.timeLeft = Number.isFinite(saved.timeLeft) && saved.timeLeft > 0
+      ? saved.timeLeft
+      : getSelectedTimeLimit();
+    state.timerPaused = Boolean(saved.timerPaused);
     state.randomMode = saved.randomMode !== false;
     state.currentIndex = Number.isInteger(saved.currentIndex)
       ? Math.min(Math.max(saved.currentIndex, 0), saved.questions.length - 1)
       : 0;
     state.showingResults = Boolean(saved.showingResults);
+    state.restoreTimer = !state.showingResults && Boolean(saved.started);
     state.sessionNoteKey = "sessionRestored";
     if (ui.questionLimit) {
       ui.questionLimit.value = String(state.limit);
@@ -402,6 +446,10 @@ function updateControls() {
     ui.finishBtn.textContent = "Аяктоо";
     ui.finishBtn.disabled = !state.started;
   }
+  if (ui.pauseBtn) {
+    ui.pauseBtn.textContent = state.timerPaused ? text.resumeLabel : text.pauseLabel;
+    ui.pauseBtn.disabled = !state.started || state.showingResults || !state.questions.length;
+  }
   if (ui.resetBtn) {
     ui.resetBtn.textContent = "Тазалоо";
     ui.resetBtn.disabled = !state.started && getAnsweredCount() === 0;
@@ -445,6 +493,7 @@ function updateControls() {
     button.setAttribute("aria-pressed", active ? "true" : "false");
   });
   updateTimerBadge();
+  updatePauseButton();
   renderSessionNote();
 }
 
@@ -523,6 +572,8 @@ function renderQuestion() {
   }
 
   const key = getQuestionKey(question, state.currentIndex);
+  const resetTimer = !state.restoreTimer;
+  state.restoreTimer = false;
   ui.quizCard.classList.remove("hidden");
   ui.resultCard.classList.add("hidden");
   state.showingResults = false;
@@ -560,7 +611,7 @@ function renderQuestion() {
 
   setBanner(text.statusQuestion);
   renderProgress();
-  startQuestionTimer();
+  startQuestionTimer(resetTimer);
   saveProgress();
 }
 
@@ -576,8 +627,12 @@ function startQuiz() {
   state.showingResults = false;
   state.currentIndex = 0;
   state.answers = {};
+  state.timeLeft = getSelectedTimeLimit();
   state.sessionNoteKey = "sessionNote";
+  state.timerPaused = false;
+  state.restoreTimer = false;
   stopQuestionTimer();
+  updatePauseButton();
   renderSessionNote();
   renderQuestion();
 }
@@ -675,6 +730,7 @@ function showResults() {
   }
 
   stopQuestionTimer();
+  state.timerPaused = false;
   state.showingResults = true;
   ui.quizCard.classList.add("hidden");
   ui.resultCard.classList.remove("hidden");
@@ -719,6 +775,7 @@ function showResults() {
   ui.resultSummary.textContent = `Жооп берилгени: ${answered} / ${state.questions.length}. Ачкычы бар суроолор: ${gradable}. Туурасы: ${correct}. Туура эмеси: ${wrong}. Жоопсуз: ${unanswered}. Ачкычы жок: ${ungraded}.`;
   setBanner(text.statusResult);
   renderProgress();
+  updatePauseButton();
   saveProgress();
   scrollIntoViewIfNeeded();
 }
@@ -730,13 +787,33 @@ function resetQuiz() {
   state.currentIndex = 0;
   state.answers = {};
   state.showingResults = false;
+  state.timerPaused = false;
+  state.restoreTimer = false;
+  state.timeLeft = getSelectedTimeLimit();
   state.sessionNoteKey = "sessionNote";
   ui.quizCard.classList.add("hidden");
   ui.resultCard.classList.add("hidden");
   setBanner(text.statusIdle);
   renderSessionNote();
   renderProgress();
+  updatePauseButton();
   clearSavedProgress();
+}
+
+function togglePauseTimer() {
+  if (!state.started || state.showingResults || !state.questions.length) {
+    return;
+  }
+
+  state.timerPaused = !state.timerPaused;
+  stopQuestionTimer();
+  updateTimerBadge();
+  updatePauseButton();
+  saveProgress();
+
+  if (!state.timerPaused) {
+    startQuestionTimer(false);
+  }
 }
 
 function setLevel(level) {
@@ -765,6 +842,7 @@ function setLevel(level) {
 
 ui.startBtn?.addEventListener("click", startQuiz);
 ui.finishBtn?.addEventListener("click", showResults);
+ui.pauseBtn?.addEventListener("click", togglePauseTimer);
 ui.resetBtn?.addEventListener("click", resetQuiz);
 ui.newVariantBtn?.addEventListener("click", startQuiz);
 ui.inlinePrevBtn?.addEventListener("click", goToPreviousQuestion);

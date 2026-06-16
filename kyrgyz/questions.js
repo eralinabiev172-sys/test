@@ -1,4 +1,4 @@
-window.kyrgyzTests = {
+﻿window.kyrgyzTests = {
   "language": {
     "B1": [
       {
@@ -2205,3 +2205,4 @@ window.kyrgyzTests = {
     "B2": []
   }
 };
+

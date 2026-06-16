@@ -1,4 +1,4 @@
-window.kyrgyzTests = {
+﻿window.kyrgyzTests = {
   "literature": {
     "B1": [
       {
@@ -1104,3 +1104,4 @@ window.kyrgyzTests = {
     ]
   }
 };
+
